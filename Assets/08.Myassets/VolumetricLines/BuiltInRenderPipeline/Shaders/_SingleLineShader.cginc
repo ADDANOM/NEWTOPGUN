@@ -34,6 +34,7 @@
 		v2f o;
 		// Pass on texture coordinates to fragment shader as they are:
 		o.uv = v.texcoord;
+		//o.a = _Color;
 		
 		// Transform to homogeneous clip space:
 		float4 csPos = UnityObjectToClipPos(v.vertex);

@@ -19,7 +19,7 @@
 /// 
 Shader "VolumetricLine/SingleLine-LightSaber" {
 	Properties {
-		[NoScaleOffset] _MainTex ("Base (RGB)", 2D) = "white" {}
+		[NoScaleOffset] _MainTex ("Base (RGB)", 2D) = "red" {}
 		_LineWidth ("Line Width", Range(0.01, 100)) = 1.0
 		_LineScale ("Line Scale", Float) = 1.0
 		_LightSaberFactor ("LightSaberFactor", Range(0.0, 1.0)) = 0.9

@@ -9,4 +9,9 @@ public class ASd : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, new Vector3(200, 200, 400));
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Destroy(other.gameObject);
+    }
 }
