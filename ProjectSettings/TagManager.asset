@@ -9,6 +9,7 @@ TagManager:
   - ENEMY
   - CONTROLLER
   - AREA
+  - SPAWNPOINT
   layers:
   - Default
   - TransparentFX

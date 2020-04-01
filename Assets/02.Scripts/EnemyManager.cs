@@ -4,30 +4,79 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public GameObject enemy1;
+    public GameObject enemy2;
+
+
+    public float spawnTime = 2.0f; // N초 간격으로 적을 생성
+    public float spawnTotTime = 5.0f; //생성할 총 시간
+    private float passedTime = 0.0f;
+
     public Transform[] points;  // 포인트를 배열로 담아준다.
-    public GameObject enemy;
 
-    public float creaTime = 3.0f; // 5초마다 생성
+    public int prevIndex = -1;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        points = GameObject.Find("SPAWNPOINT").GetComponentsInChildren<Transform>();  // 시작과 함께 points에 배열에 담기
-        StartCoroutine(this.CreatEnemy());
+        //timer = Time.time;
+
+        //InvokeRepeating("stage1", spawnTime, spawnTime);  // spawnTime만큼 대기후, spawnTime초 마다 Spawn을 호출한다.
+        
+        StartCoroutine(CreateEnemy1());
+        
     }
 
-    IEnumerator CreatEnemy()
-    {
-        while (true)
-        {
-            int idx = Random.Range(1, points.Length);
-            Instantiate(enemy, points[idx].position, Quaternion.identity);
 
-            yield return new WaitForSeconds(creaTime);
+
+    IEnumerator CreateEnemy1()
+    {
+        while (passedTime <= spawnTotTime)  // spawnTotTime == 5초보다 passedTime이 작을때까지 실행
+        {
+            yield return new WaitForSeconds(spawnTime);
+
+            int spawnPointIndex = Random.Range(0, points.Length);  // 스폰 포인트 배열값
+
+            while (spawnPointIndex == prevIndex )  // 똑같은 스폰 위치에 스폰이 안되도록 설정
+            {
+                spawnPointIndex = Random.Range(0, points.Length);
+            }
+            prevIndex = spawnPointIndex;
+
+            Instantiate(enemy1, points[spawnPointIndex].position, points[spawnPointIndex].rotation);
+
+            passedTime = Time.time;
+        }
+        
+        //Debug.Log("Finish");
+
+        yield return StartCoroutine(CreateEnemy2());
+    }
+
+    IEnumerator CreateEnemy2()
+    {
+        //Debug.Log("Loding");
+        while (passedTime <= 18.0f)
+        {
+            //Debug.Log("Restart");
+            yield return new WaitForSeconds(spawnTime);
+
+            int spawnPointIndex = Random.Range(0, points.Length);  // 스폰 포인트 배열값
+
+            while (spawnPointIndex == prevIndex)  // 똑같은 스폰 위치에 스폰이 안되도록 설정
+            {
+                spawnPointIndex = Random.Range(0, points.Length);
+            }
+            prevIndex = spawnPointIndex;
+
+            Instantiate(enemy2, points[spawnPointIndex].position, points[spawnPointIndex].rotation);
+
+            passedTime = Time.time;
         }
     }
 
-    // Update is called once per frame
+
+
     void Update()
     {
         
