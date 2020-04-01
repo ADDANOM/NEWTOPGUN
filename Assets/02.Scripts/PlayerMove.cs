@@ -14,7 +14,10 @@ public class PlayerMove : MonoBehaviour
     private float v, h;
     private ParticleSystem Booster_1;
     private ParticleSystem Booster_2;
-
+    private ParticleSystem Bomb;
+    private ParticleSystem Shot;
+    private float nextBomb = 0.0f;
+    private float bombRate = 3.0f;
 
     private Transform Controller_Tr, Controller_Tr2;
 
@@ -25,14 +28,21 @@ public class PlayerMove : MonoBehaviour
     public GameObject check_ctrl_left;
     public GameObject check_ctrl_right;
 
-    public float forwardSpeed;
-    public float moveSide;
-    public float moveUp;
+    float forwardSpeed;
+    float moveSide;
+    float moveUp;
+    bool moveForward;
+    bool moveBehind;
+    float _go;
     public float speed = 50.0f;
     public SteamVR_Input_Sources leftHand;
     public SteamVR_Input_Sources rightHand;
-    public SteamVR_Behaviour_Pose pose;
-    public GameObject Player_Direction;
+
+    public bool onFire = false;
+    public bool onBomb = false;
+    public GameObject mainshotPos;
+    public GameObject subshotPos_a;
+    public GameObject subshotPos_b;
 
 
 
@@ -47,6 +57,8 @@ public class PlayerMove : MonoBehaviour
         anim = transform.Find("FighterInterceptor").GetComponent<Animator>();
         Booster_1 = transform.Find("FighterInterceptor").transform.Find("Booster_1").GetComponent<ParticleSystem>();
         Booster_2 = transform.Find("FighterInterceptor").transform.Find("Booster_2").GetComponent<ParticleSystem>();
+        Bomb = transform.Find("Bomb_Effect").GetComponent<ParticleSystem>();
+        Shot = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
         Controller_Tr = transform.Find("[CameraRig]").transform.GetChild(1).transform.GetChild(1).GetComponent<Transform>();
         Controller_Tr2 = transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
 
@@ -58,8 +70,6 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //moveDirection = Quaternion.AngleAxis(Player_Direction.transform.localRotation.eulerAngles.y, Vector3.up) * Vector3.forward;
-
         ctrl();
 
         updateInput();
@@ -67,9 +77,47 @@ public class PlayerMove : MonoBehaviour
         if (check_ctrl == true)
             rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
 
+        shot();
+
         //Debug.Log(Controller_Tr.eulerAngles.y); // left / right
         //Debug.Log(Controller_Tr.eulerAngles.y + " ; " + Controller_Tr2.eulerAngles.y); // up / down
 
+
+    }
+
+    private void shot()
+    {
+        onFire = SteamVR_Actions._default.InteractUI.GetState(rightHand);
+        onBomb = SteamVR_Actions._default.InteractUI.GetState(leftHand);
+
+        if (onFire)
+        {
+            if (!Shot.isPlaying)
+            {
+                Shot.Play();
+            }
+            mainshotPos.GetComponent<PlayerFire>().enabled = true;
+            subshotPos_a.GetComponent<PlayerSubFire>().enabled = true;
+            subshotPos_b.GetComponent<PlayerSubFire>().enabled = true;
+        }
+        else
+        {
+            if (Shot.isPlaying)
+            {
+                Shot.Stop();
+            }
+            mainshotPos.GetComponent<PlayerFire>().enabled = false;
+            subshotPos_a.GetComponent<PlayerSubFire>().enabled = false;
+            subshotPos_b.GetComponent<PlayerSubFire>().enabled = false;
+        }
+        if (onBomb && !Bomb.isPlaying)
+        {
+            if (Time.time >= nextBomb)
+            {
+                Bomb.Play();
+                nextBomb = Time.time + bombRate;
+            }
+        }
 
     }
 
@@ -89,8 +137,19 @@ public class PlayerMove : MonoBehaviour
     private void updateInput()
     {
 
-        trackpad = SteamVR_Actions._default.speedUp.GetAxis(rightHand);
-        forwardSpeed = -1.0f * trackpad.x; // moving forward , backward
+        moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
+        moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
+
+        if (moveForward & !moveBehind)
+            _go = 1.0f;
+        else if (moveBehind & !moveForward)
+            _go = -1.0f;
+        else
+            _go = 0.0f;
+
+
+        //trackpad = SteamVR_Actions._default.speedUp.GetAxis(rightHand);
+        forwardSpeed = -1.0f * _go; // moving forward , backward
 
         var main1 = Booster_1.main;
         var main2 = Booster_2.main;
