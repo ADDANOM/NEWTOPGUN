@@ -52,7 +52,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6649900309234622880}
-    m_Position: {x: 377.5351, y: 92.78471, z: 0}
+    m_Position: {x: 380, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -111,8 +111,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Player_Up
     m_Mirror: 0
-  m_BlendParameter: Player_Up
-  m_BlendParameterY: Player_Side
+  m_BlendParameter: Player_Side
+  m_BlendParameterY: Player_Up
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -147,13 +147,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Player_Side
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

@@ -7,6 +7,7 @@ TagManager:
   - projectile
   - FxTemporaire
   - ENEMY
+  - CONTROLLER
   layers:
   - Default
   - TransparentFX
