@@ -34,8 +34,8 @@ public class E_Attack : MonoBehaviour
         var _bullet1 = Instantiate(bullet, firePos1.position, firePos1.rotation);
         var _bullet2 = Instantiate(bullet, firePos2.position, firePos2.rotation);
 
-        _bullet1.GetComponent<E_Bullet>();
-        _bullet2.GetComponent<E_Bullet>();
+        _bullet1.GetComponent<Missile>();
+        _bullet2.GetComponent<Missile>();
 
     }
 }

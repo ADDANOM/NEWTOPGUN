@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 1468237413}
   - component: {fileID: 1526263335}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet 1
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 136330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -25151.36}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.01}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.02}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -178,7 +178,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!136 &1468237413
 CapsuleCollider:
@@ -190,10 +190,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 4.913323
-  m_Height: 146.96832
+  m_Radius: 0.40000004
+  m_Height: 69.859314
   m_Direction: 2
-  m_Center: {x: -0.30844927, y: 0, z: 21.21805}
+  m_Center: {x: -0.07890612, y: -0.08681923, z: 23.46077}
 --- !u!114 &1526263335
 MonoBehaviour:
   m_ObjectHideFlags: 0

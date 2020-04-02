@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 5952051357166483318}
   m_Layer: 0
   m_Name: Super_Spitfire
-  m_TagString: Untagged
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1806,7 +1806,7 @@ GameObject:
   - component: {fileID: 5952051358367180038}
   m_Layer: 0
   m_Name: Super_Spitfire (1)
-  m_TagString: Untagged
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2606,7 +2606,7 @@ GameObject:
   - component: {fileID: 5952051358870841577}
   m_Layer: 0
   m_Name: Super_Spitfire (2)
-  m_TagString: Untagged
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2911,7 +2911,7 @@ GameObject:
   - component: {fileID: -605566668180564688}
   m_Layer: 0
   m_Name: Nomal_3L
-  m_TagString: Untagged
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

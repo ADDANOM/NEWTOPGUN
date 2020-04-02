@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1854316386956826363}
   m_Layer: 0
   m_Name: Gunship
-  m_TagString: Untagged
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

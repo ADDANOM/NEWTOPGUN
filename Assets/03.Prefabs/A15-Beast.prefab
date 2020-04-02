@@ -485,8 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac033bb867dfa724fb62b7acb03aeef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExPlosion: {fileID: 8015493585924490059, guid: 7d61a1b4a94c74842937450db2c96514,
-    type: 3}
   curHealth: 100
   isAlive: 1
 --- !u!114 &2125707187
@@ -502,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
-  pTr: {fileID: 0}
+  pTr: {fileID: 8733605799810580370, guid: 81f7c8edf82b61846b8a6853556c6bc2, type: 3}
   firePos1: {fileID: 318654254}
   firePos2: {fileID: 819720285}
 --- !u!1 &4516714734643913720

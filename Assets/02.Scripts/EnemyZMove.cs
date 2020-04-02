@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyZMove : MonoBehaviour
 {
-    public float moveSpeed = 0.5f;
+    public float moveSpeed = 10.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,12 +15,13 @@ public class EnemyZMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveControll();
+        float zMove =  (moveSpeed * Time.deltaTime);
+        transform.Translate(0, 0, zMove);
+
+         
+        
+
     }
 
-    void MoveControll()
-    {
-        float zMove = moveSpeed * Time.deltaTime;
-        transform.Translate(0, 0, zMove);
-    }
+    
 }
