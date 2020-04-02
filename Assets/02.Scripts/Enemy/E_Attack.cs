@@ -10,7 +10,7 @@ public class E_Attack : MonoBehaviour
     public Transform firePos1;
     public Transform firePos2;
 
-    private float fireRate = 1.0f;
+    private float fireRate = 3.0f;
     private float nextfire;
 
     void Start()

@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemtyHealth : MonoBehaviour
+public class EnemyControll : MonoBehaviour
 {
     //public ParticleSystem ExPlosion;
-    
+    public float moveSpeed = 10.0f;  // EnenmyMove 속도값.
 
     public float curHealth = 100.0f;
     public bool isAlive = true;
 
-    
+
     void Start()
     {
-      
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        EnenmyMove();
     }
 
     private void OnTriggerEnter(Collider coll)
@@ -32,4 +32,12 @@ public class EnemtyHealth : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    void EnenmyMove()
+    {
+        float zMove = (moveSpeed * Time.deltaTime);
+        transform.Translate(0, 0, zMove);
+    }
+
+    
 }

@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bb8bf9bcf34d742b3e9324724a5e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
+  bullet: {fileID: 2640521921729353359, guid: 3c971934bc9d8954e813fead9ce5874e, type: 3}
   pTr: {fileID: 8733605799810580370, guid: 81f7c8edf82b61846b8a6853556c6bc2, type: 3}
   firePos1: {fileID: 318654254}
   firePos2: {fileID: 819720285}

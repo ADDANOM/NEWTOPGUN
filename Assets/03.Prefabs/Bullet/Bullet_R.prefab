@@ -19,7 +19,7 @@ GameObject:
   m_Layer: 0
   m_Name: Bullet_R
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -31,8 +31,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2640521921729353359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.24, y: 1.3970001, z: -16.786}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.01}
+  m_LocalPosition: {x: -2.2261, y: 1.3970001, z: -16.882}
+  m_LocalScale: {x: 0.14514, y: 0.14514, z: 0.014514}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
