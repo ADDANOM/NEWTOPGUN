@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: cc3d5a73d5e4cf2498bffd1c3c5ad691
 ModelImporter:
-  serializedVersion: 27
+  serializedVersion: 19300
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -10,7 +10,7 @@ ModelImporter:
       name: Corvette-F3
     second: {fileID: 2100000, guid: defbdb8d47c401641be7b7c013675558, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -39,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -85,12 +85,13 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.49999997
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
