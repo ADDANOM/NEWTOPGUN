@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 9047575367818528613}
   - component: {fileID: 4581255030857241032}
   - component: {fileID: 1951281479045403156}
-  - component: {fileID: -8429172240863921265}
+  - component: {fileID: 6116091551286676637}
   m_Layer: 0
-  m_Name: Bullet_new_Rice
+  m_Name: Bullet_new_Rice_boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-8429172240863921265
+--- !u!114 &6116091551286676637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
