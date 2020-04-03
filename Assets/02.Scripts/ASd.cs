@@ -13,5 +13,10 @@ public class ASd : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Destroy(other.gameObject);
+        if (other.CompareTag("ENEMY"))
+        {
+            Destroy(other.gameObject);
+        }
     }
+    
 }

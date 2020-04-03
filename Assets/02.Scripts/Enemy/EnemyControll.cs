@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class EnemyControll : MonoBehaviour
 {
-    //public ParticleSystem ExPlosion;
+    private ParticleSystem ExPlosion;
     public float moveSpeed = 10.0f;  // EnenmyMove 속도값.
 
     public float curHealth = 100.0f;
     public bool isAlive = true;
 
-
+    private float timer = 0;
     void Start()
     {
-        
+        ExPlosion = transform.Find("E_Bomb_Effect").GetComponent<ParticleSystem>();
+
+        timer += Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -21,16 +23,20 @@ public class EnemyControll : MonoBehaviour
     {
         EnenmyMove();
     }
-
-    private void OnTriggerEnter(Collider coll)
+    private void OnTriggerEnter(Collider other)
     {
-        
-        //ExPlosion.gameObject.SetActive(true);  // 체력이 다했을 때로 발생하도록 수정필요!
-        if (coll.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             Debug.Log("Destroy");
-            Destroy(this.gameObject);
+            ExPlosion.Play();  // 체력 0이 되면 실행하면된다. / 지금은 바로실행됨;   
+            timer++;
+            if (timer > 3.0f)
+            {
+                Debug.Log("ad");
+                Destroy(gameObject);
+            }
         }
+        
     }
 
     void EnenmyMove()
@@ -39,5 +45,5 @@ public class EnemyControll : MonoBehaviour
         transform.Translate(0, 0, zMove);
     }
 
-    
+   
 }
