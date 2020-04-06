@@ -10,6 +10,8 @@ TagManager:
   - CONTROLLER
   - AREA
   - SPAWNPOINT
+  - BULLET
+  - BOSS
   layers:
   - Default
   - TransparentFX

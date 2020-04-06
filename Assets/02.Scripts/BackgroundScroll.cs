@@ -10,7 +10,7 @@ public class BackgroundScroll : MonoBehaviour
 
     void Start()
     {
-        scrollSpeed = 2.0f;
+        scrollSpeed = 5.0f;
         rg = GetComponent<Rigidbody>();
         
     }

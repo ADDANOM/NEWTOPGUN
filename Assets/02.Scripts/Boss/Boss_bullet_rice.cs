@@ -10,4 +10,17 @@ public class Boss_bullet_rice : MonoBehaviour
         Destroy(this.gameObject, 3.0f);
     }
 
+    void OnEnable()
+    {
+        Boss_Attack.OnBulletClear += BulletClear;
+    }
+    void OnDisable()
+    {
+        Boss_Attack.OnBulletClear -= BulletClear;
+    }
+
+    void BulletClear()
+    {
+        Destroy(this.gameObject);
+    }
 }

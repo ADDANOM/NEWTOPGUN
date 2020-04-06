@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-
+using Sym = Sym4D.Sym4DEmulator;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -18,16 +18,18 @@ public class PlayerMove : MonoBehaviour
     private ParticleSystem Shot;
     private float nextBomb = 0.0f;
     private float bombRate = 3.0f;
+    private Boss_Health boss_health;
 
+
+    // 컨트롤러 체크
     private Transform Controller_Tr, Controller_Tr2;
-
     static public bool check_ctrl;
-
     private float distance;
     private Transform check_tr_1, check_tr_2;
     public GameObject check_ctrl_left;
     public GameObject check_ctrl_right;
 
+    //이동
     float forwardSpeed;
     float moveSide;
     float moveUp;
@@ -38,13 +40,19 @@ public class PlayerMove : MonoBehaviour
     public SteamVR_Input_Sources leftHand;
     public SteamVR_Input_Sources rightHand;
 
+    //공격
     public bool onFire = false;
     public bool onBomb = false;
     public GameObject mainshotPos;
     public GameObject subshotPos_a;
     public GameObject subshotPos_b;
 
-
+    //심포디
+    public int xPort; //좌석장비의 통신 포트
+    public int wPort; //바람장비의 통신 포트
+    private WaitForSeconds ws = new WaitForSeconds(1.5f);
+    float prevJoyX, prevJoyY;
+    float currJoyX, currJoyY;
 
     void Awake()
     {
@@ -55,6 +63,7 @@ public class PlayerMove : MonoBehaviour
         rg = GetComponent<Rigidbody>();
 
         anim = transform.Find("FighterInterceptor").GetComponent<Animator>();
+
         Booster_1 = transform.Find("FighterInterceptor").transform.Find("Booster_1").GetComponent<ParticleSystem>();
         Booster_2 = transform.Find("FighterInterceptor").transform.Find("Booster_2").GetComponent<ParticleSystem>();
         Bomb = transform.Find("Bomb_Effect").GetComponent<ParticleSystem>();
@@ -65,11 +74,16 @@ public class PlayerMove : MonoBehaviour
         check_tr_1 = check_ctrl_left.GetComponent<Transform>();
         check_tr_2 = check_ctrl_right.GetComponent<Transform>();
 
+        boss_health = GameObject.Find("Boss_position").transform.Find("BOSS").GetComponent<Boss_Health>();
+
+        xPort = Sym.Sym4D_X_Find();
+        wPort = Sym.Sym4D_W_Find();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
         ctrl();
 
         updateInput();
@@ -115,7 +129,14 @@ public class PlayerMove : MonoBehaviour
             if (Time.time >= nextBomb)
             {
                 Bomb.Play();
+                Boss_Attack.player_bomb();
                 nextBomb = Time.time + bombRate;
+
+                if (boss_health.curBossHealth > 500.0f)
+                    boss_health.curBossHealth -= 500.0f;
+                else
+                    boss_health.BossDeath = true;
+
             }
         }
 
@@ -126,7 +147,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 offset = check_tr_1.position - check_tr_2.position;
         distance = offset.sqrMagnitude;
 
-        if (distance < 0.01f)
+        if (distance < 0.01f && distance != 0.0f)
             check_ctrl = true;
         else
             check_ctrl = false;
@@ -136,10 +157,8 @@ public class PlayerMove : MonoBehaviour
 
     private void updateInput()
     {
-
         moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
         moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
-
         if (moveForward & !moveBehind)
             _go = 1.0f;
         else if (moveBehind & !moveForward)
@@ -174,12 +193,16 @@ public class PlayerMove : MonoBehaviour
             if (v >= -0.98f)
                 v -= 0.02f;
             moveSide = -1.0f * Time.deltaTime;
+
+
         }
         else if (Controller_Tr.eulerAngles.x >= 10 && Controller_Tr.eulerAngles.x <= 50 && Controller_Tr.eulerAngles.y > 75) // right
         {
             if (v <= 0.98f)
                 v += 0.02f;
             moveSide = Time.deltaTime;
+
+
         }
         else
         {
@@ -188,6 +211,8 @@ public class PlayerMove : MonoBehaviour
                 v -= 0.02f;
             else if (v < 0.0f)
                 v += 0.02f;
+
+
         }
 
 
@@ -197,12 +222,16 @@ public class PlayerMove : MonoBehaviour
             if (h <= 0.98f)
                 h += 0.02f;
             moveUp = Time.deltaTime;
+
+
         }
         else if (Controller_Tr.eulerAngles.z > 295) // down
         {
             if (h >= -0.98f)
                 h -= 0.02f;
             moveUp = -1.0f * Time.deltaTime;
+
+
         }
         else
         {
@@ -213,17 +242,36 @@ public class PlayerMove : MonoBehaviour
                 h += 0.02f;
         }
 
+        if (check_ctrl)
+        {
+            anim.SetFloat("Player_Side", v);
+            anim.SetFloat("Player_Up", h);
 
-        anim.SetFloat("Player_Side", v);
-        anim.SetFloat("Player_Up", h);
+            //심포디
+            currJoyX = v;
+            currJoyY = h;
+            Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
+
+            if (currJoyX != prevJoyX)
+            {
+                //Change Roll
+                prevJoyX = currJoyX;
+                StartCoroutine(ChangeRollNPitch());
+            }
+
+            if (currJoyY != prevJoyY)
+            {
+                //Change Pitch
+                prevJoyY = currJoyY;
+                StartCoroutine(ChangeRollNPitch());
+            }
+        }
 
         // if (check_ctrl == false)
         // {
         //     anim.SetFloat("Player_Side", 0);
         //     anim.SetFloat("Player_Up", 0);
         // }
-
-
 
         // if (Controller_Tr.eulerAngles.y < 75) //..
         // {
@@ -247,7 +295,24 @@ public class PlayerMove : MonoBehaviour
         // }
 
     }
+    IEnumerator ChangeRollNPitch()
+    {
 
+        yield return new WaitForSeconds(0.1f);
+
+        //Sym4D-X100 COM Port Open  및 컨텐츠 시작을 장치에 전달
+        Sym.Sym4D_X_StartContents(xPort);
+        yield return new WaitForSeconds(0.1f);
+
+        Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 100), (int)(currJoyY * 100));
+
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    void OnDestroy()
+    {
+        Sym.Sym4D_X_EndContents();
+    }
 
 
 }

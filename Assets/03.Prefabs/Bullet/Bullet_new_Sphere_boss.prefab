@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7145279800917229012}
   m_Layer: 0
   m_Name: Bullet_new_Sphere_boss
-  m_TagString: Untagged
+  m_TagString: BULLET
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 1418041971}
   m_Layer: 0
   m_Name: boss_collider_center_2
-  m_TagString: Untagged
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 8725097859274938912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 122.1}
-  m_LocalScale: {x: 64.114586, y: 57.784737, z: 184.66194}
+  m_LocalScale: {x: 300, y: 57.784737, z: 277.5866}
   m_Children: []
   m_Father: {fileID: 8725097861200053452}
   m_RootOrder: 1
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 8725097859300656571}
   - component: {fileID: 8725097859300656572}
   - component: {fileID: 1446774252}
+  - component: {fileID: 8725097860541907026}
   m_Layer: 0
   m_Name: BOSS
   m_TagString: Untagged
@@ -191,6 +192,22 @@ MonoBehaviour:
     type: 3}
   bullet_sphere: {fileID: 3984693551982879377, guid: 187d8537fbd89fc459ceb58d0003a436,
     type: 3}
+  bossPosition: {fileID: 0}
+  bossAttackPatern: 0
+--- !u!114 &8725097860541907026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8725097859300656570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304a6e2b7c3cb444eaf22ced601931b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curBossHealth: 50000
+  BossDeath: 0
 --- !u!1 &8725097859334533626
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +281,7 @@ GameObject:
   - component: {fileID: 1879360849}
   m_Layer: 0
   m_Name: boss_collider_center_3
-  m_TagString: Untagged
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8725097860379970166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 228.8}
+  m_LocalPosition: {x: 0, y: 0, z: 250}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8725097860319194920}
@@ -469,7 +486,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8725097860420178835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -57, y: 0, z: 250}
+  m_LocalPosition: {x: -356.3, y: 0, z: 250}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8725097860319194920}
@@ -488,7 +505,7 @@ GameObject:
   - component: {fileID: 433831824}
   m_Layer: 0
   m_Name: boss_collider_right
-  m_TagString: Untagged
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -501,7 +518,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8725097860435328989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90, y: 0, z: -55}
+  m_LocalPosition: {x: 125, y: 0, z: -55}
   m_LocalScale: {x: 90, y: 100, z: 360}
   m_Children: []
   m_Father: {fileID: 8725097861200053452}
@@ -579,7 +596,7 @@ GameObject:
   - component: {fileID: 194593917}
   m_Layer: 0
   m_Name: boss_collider_left
-  m_TagString: Untagged
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -592,7 +609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8725097860733223978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -90, y: 0, z: -55}
+  m_LocalPosition: {x: -125, y: 0, z: -55}
   m_LocalScale: {x: 90, y: 100, z: 360}
   m_Children: []
   m_Father: {fileID: 8725097861200053452}
@@ -730,7 +747,7 @@ GameObject:
   - component: {fileID: 992536685}
   m_Layer: 0
   m_Name: boss_collider_center_1
-  m_TagString: Untagged
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
