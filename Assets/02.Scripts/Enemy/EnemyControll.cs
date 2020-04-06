@@ -10,33 +10,61 @@ public class EnemyControll : MonoBehaviour
     public float curHealth = 100.0f;
     public bool isAlive = true;
 
-    private float timer = 0;
+    private float timer;
+
+    Transform EnemyPos;
+    
+
     void Start()
     {
-        ExPlosion = transform.Find("E_Bomb_Effect").GetComponent<ParticleSystem>();
+        //ExPlosion = transform.Find("E_Bomb_Effect").GetComponent<ParticleSystem>();  // 주석 풀어줘야함
+        EnemyPos = GetComponent<Transform>();
 
-        timer += Time.deltaTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         EnenmyMove();
+
+        if (this == false)
+        {
+            Debug.Log("Die??");
+
+        }
+        
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Destroy");
-            ExPlosion.Play();  // 체력 0이 되면 실행하면된다. / 지금은 바로실행됨;   
-            timer++;
-            if (timer > 3.0f)
-            {
-                Debug.Log("ad");
-                Destroy(gameObject);
-            }
+            curHealth = 0.0f;
+            //ExPlosion.Play();  // 체력 0이 되면 실행하면된다. / 지금은 바로실행됨;  
+
+            this.gameObject.SetActive(false);
+            EnemyPos = other.transform;
+            RandomItemSpawn();
+            //Destroy(this);
+            //Debug.Log("Destroy");
+            
         }
-        
+    }
+
+   void RandomItemSpawn()
+    {
+        float rand = Random.value;  // 0.0~1.0 이내의 랜덤값을 가져온다.
+
+        if(rand <= 0.3f)  // 30% 확률로 아이템 소환
+        {
+            Debug.Log("SoWhan!!");
+
+            GameManager.instans.RandomItemBox();
+        }
+        else
+        {
+            return;
+        }
     }
 
     void EnenmyMove()
@@ -45,5 +73,4 @@ public class EnemyControll : MonoBehaviour
         transform.Translate(0, 0, zMove);
     }
 
-   
 }

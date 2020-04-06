@@ -12,6 +12,8 @@ TagManager:
   - SPAWNPOINT
   - BULLET
   - BOSS
+  - PLAYERBULLET
+  - BOX
   layers:
   - Default
   - TransparentFX
