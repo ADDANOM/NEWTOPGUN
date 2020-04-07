@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 1397136603530442005}
   - component: {fileID: 8114536706124469227}
   - component: {fileID: -4126981274550726743}
+  - component: {fileID: 592762684771979820}
   m_Layer: 0
   m_Name: Gunship
   m_TagString: ENEMY
@@ -366,6 +367,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &592762684771979820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190480763307494769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9181d4e7778db0447bc7fc714fd9a17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Boom: {fileID: 4956935788600844604, guid: 29f2099a685edfd4f8cfc4f8d6a2fb68, type: 3}
+  Lazer: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a, type: 3}
+  Missile: {fileID: 4956935788600844604, guid: df4ab1b2043497d4d8ac717116734ee7, type: 3}
 --- !u!1 &7626255393857110874
 GameObject:
   m_ObjectHideFlags: 0

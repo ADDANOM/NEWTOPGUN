@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     public GameObject Enemy1;
     public GameObject Enemy2;
@@ -12,6 +12,8 @@ public class EnemyManager : MonoBehaviour
     public GameObject Enemy6;
     public GameObject Enemy7;
     public GameObject Enemy8;
+
+    //public List<GameObject> EnemyList = new List<GameObject>();
 
     public float spawnTime = 2.0f; // N초 간격으로 적을 생성
     public float spawnTotTime = 6.0f; //생성할 총 시간

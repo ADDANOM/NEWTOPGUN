@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 6019038367452390691}
   - component: {fileID: 2550649873234115344}
   - component: {fileID: 786627532734714236}
+  - component: {fileID: 3192878969393369349}
   m_Layer: 0
   m_Name: Super_Spitfire
   m_TagString: ENEMY
@@ -300,6 +301,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3192878969393369349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278535786616349047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9181d4e7778db0447bc7fc714fd9a17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Boom: {fileID: 4956935788600844604, guid: 29f2099a685edfd4f8cfc4f8d6a2fb68, type: 3}
+  Lazer: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a, type: 3}
+  Missile: {fileID: 4956935788600844604, guid: df4ab1b2043497d4d8ac717116734ee7, type: 3}
 --- !u!1 &1278535786648297022
 GameObject:
   m_ObjectHideFlags: 0
