@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class EnemyControll : MonoBehaviour
 {
-    private ParticleSystem ExPlosion;
+    GameObject Fa;
+
     public float moveSpeed = 10.0f;  // EnenmyMove 속도값.
 
-    public float curHealth = 100.0f;
+    public float EnemycurHealth = 10.0f;
     public bool isAlive = true;
 
-    private float timer;
 
-    Transform EnemyPos;
+
+    private float timer;
     
 
     void Start()
     {
-        //ExPlosion = transform.Find("E_Bomb_Effect").GetComponent<ParticleSystem>();  // 주석 풀어줘야함
-        EnemyPos = GetComponent<Transform>();
-
+        Fa = transform.gameObject;
+        
     }
 
     // Update is called once per frame
@@ -28,42 +28,27 @@ public class EnemyControll : MonoBehaviour
         timer += Time.deltaTime;
         EnenmyMove();
 
-        if (this == false)
-        {
-            Debug.Log("Die??");
-
-        }
-        
+       
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && EnemycurHealth >= 1.0f)  // 직접 부딪힐 때
         {
-            curHealth = 0.0f;
+            EnemycurHealth -= 10.0f;
             //ExPlosion.Play();  // 체력 0이 되면 실행하면된다. / 지금은 바로실행됨;  
 
-            this.gameObject.SetActive(false);
-            EnemyPos = other.transform;
-            RandomItemSpawn();
-            //Destroy(this);
-            //Debug.Log("Destroy");
+            Debug.Log("Destroy");
+            Destroy(Fa);
+        }
+        else if (other.gameObject.CompareTag("PLAYERBULLET"))
+        {
+            EnemycurHealth -= 2.0f;
             
-        }
-    }
+            if(EnemycurHealth == 0.0f)
+            {
+                Destroy(Fa);
+            }
 
-   void RandomItemSpawn()
-    {
-        float rand = Random.value;  // 0.0~1.0 이내의 랜덤값을 가져온다.
-
-        if(rand <= 0.3f)  // 30% 확률로 아이템 소환
-        {
-            Debug.Log("SoWhan!!");
-
-            // GameManager.instans.RandomItemBox();
-        }
-        else
-        {
-            return;
         }
     }
 

@@ -7,6 +7,8 @@ public class RandomItem : MonoBehaviour
     float MoveSpeed = 10.0f;
 
     GameObject item;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +20,6 @@ public class RandomItem : MonoBehaviour
     {
         Boxmove();
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (gameObject.CompareTag("Player"))
-        {
-            Destroy(item);
-        }
-    }
     
     void Boxmove()
     {
@@ -34,4 +28,7 @@ public class RandomItem : MonoBehaviour
 
         Destroy(item, 7.0f);
     }
+    
+
+    
 }

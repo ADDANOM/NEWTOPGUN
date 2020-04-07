@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  curHealth: 100
+  EnemycurHealth: 10
   isAlive: 1
 --- !u!54 &786627532734714236
 Rigidbody:
@@ -316,6 +316,8 @@ MonoBehaviour:
   Boom: {fileID: 4956935788600844604, guid: 29f2099a685edfd4f8cfc4f8d6a2fb68, type: 3}
   Lazer: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a, type: 3}
   Missile: {fileID: 4956935788600844604, guid: df4ab1b2043497d4d8ac717116734ee7, type: 3}
+  ExPlosion: {fileID: 8762935140990515102, guid: da67cb2a22a852944b2cf59c04ad212c,
+    type: 3}
 --- !u!1 &1278535786648297022
 GameObject:
   m_ObjectHideFlags: 0

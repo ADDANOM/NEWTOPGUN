@@ -8,14 +8,17 @@ public class DisItem : MonoBehaviour
 
     Transform tr;
 
-
     public GameObject Boom;
     public GameObject Lazer;
     public GameObject Missile;
 
+    public ParticleSystem ExPlosion;
+
     void Start()
     {
         tr = GetComponent<Transform>();
+
+        //ExPlosion = transform.Find("E_explosion").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -26,19 +29,18 @@ public class DisItem : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("Disable");
-
         pos = tr.position;
 
-        RandomItemSpawn();
+        PlayParticle();
 
+        RandomItemSpawn();
     }
 
     void RandomItemSpawn()
     {
         float rand = Random.value;  // 0.0~1.0 이내의 랜덤값을 가져온다.
 
-        if (rand <= 0.9f)  // 30% 확률로 아이템 소환
+        if (rand <= 0.035f)  // 30% 확률로 아이템 소환
         {
             Debug.Log("SoWhan!!");
 
@@ -50,7 +52,7 @@ public class DisItem : MonoBehaviour
         }
     }
 
-    public void RandomItemBox()
+    void RandomItemBox()
     {
         Debug.Log("Check");
 
@@ -78,5 +80,13 @@ public class DisItem : MonoBehaviour
         {
             return;
         }
+    }
+
+    void PlayParticle()
+    {
+        Instantiate(ExPlosion, pos, tr.rotation);
+        
+
+        Destroy(ExPlosion,1.0f);
     }
 }
