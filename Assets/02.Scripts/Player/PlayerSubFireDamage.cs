@@ -17,10 +17,8 @@ public class PlayerSubFireDamage : MonoBehaviour
     {
         if (other.gameObject.CompareTag("BOSS"))
         {
-            if (BossHealth.curBossHealth > 10.0f)
-                BossHealth.curBossHealth -= 10.0f;
-            else
-                BossHealth.BossDeath = true;
+            BossHealth.curBossHealth -= 10.0f;
+
 
             transform.SetParent(other.transform, true);
             particle.Play();

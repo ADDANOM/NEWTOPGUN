@@ -16,10 +16,8 @@ public class PlayerFireDamage : MonoBehaviour
     {
         if (other.gameObject.CompareTag("BOSS"))
         {
-            if (BossHealth.curBossHealth > 1.0f)
-                BossHealth.curBossHealth -= 1.0f;
-            else
-                BossHealth.BossDeath = true;
+            BossHealth.curBossHealth -= 1.0f;
+
 
 
             transform.SetParent(other.transform, true);

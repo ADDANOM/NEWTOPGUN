@@ -27,7 +27,7 @@ public class Boss_Attack : MonoBehaviour
     Transform boss_attack_left_center_3;
     Transform boss_attack_left_front;
     Transform boss_attack_middle_center;
-
+    Boss_Health boss_Health;
 
 
 
@@ -39,6 +39,7 @@ public class Boss_Attack : MonoBehaviour
         player_tr_2 = GameObject.Find("Player").transform;
         player_tr_3 = GameObject.Find("newPlayer").transform;
         player_tr_1 = player_tr_2;
+        boss_Health = GetComponent<Boss_Health>();
 
         boss_attack_center_up = transform.Find("BOSS_Attackplaces").transform.Find("boss_attack_center_up").GetComponent<Transform>();
         boss_attack_center_right = transform.Find("BOSS_Attackplaces").transform.Find("boss_attack_center_right").GetComponent<Transform>();
@@ -83,10 +84,12 @@ public class Boss_Attack : MonoBehaviour
             }
         }
 
-        if (!player_tr_2.gameObject.GetComponent<PlayerHealth>().PlayerDeath || !player_tr_3.gameObject.GetComponent<PlayerHealth>().PlayerDeath)
+        if (boss_Health.BossDeath)
+        return;
+        else if (!player_tr_2.gameObject.GetComponent<PlayerHealth>().PlayerDeath || !player_tr_3.gameObject.GetComponent<PlayerHealth>().PlayerDeath)
         Boss_attackPattern();
         else
-        player_bomb();
+        GameManager.player_bomb();
 
     }
 
@@ -358,13 +361,6 @@ public class Boss_Attack : MonoBehaviour
 
     }
 
-    public delegate void BulletClearHandler();
-    public static event BulletClearHandler OnBulletClear;
-
-    public static void player_bomb()
-    {
-        OnBulletClear();
-    }
 
 
 }

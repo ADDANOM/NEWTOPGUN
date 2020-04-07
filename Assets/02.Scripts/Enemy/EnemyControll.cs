@@ -14,12 +14,20 @@ public class EnemyControll : MonoBehaviour
 
 
     private float timer;
-    
+
 
     void Start()
     {
         Fa = transform.gameObject;
-        
+
+    }
+    void OnEnable()
+    {
+        GameManager.onBulletClear += BulletClear;
+    }
+    void OnDisable()
+    {
+        GameManager.onBulletClear -= BulletClear;
     }
 
     // Update is called once per frame
@@ -28,7 +36,7 @@ public class EnemyControll : MonoBehaviour
         timer += Time.deltaTime;
         EnenmyMove();
 
-       
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,11 +48,12 @@ public class EnemyControll : MonoBehaviour
             Debug.Log("Destroy");
             Destroy(Fa);
         }
-        else if (other.gameObject.CompareTag("PLAYERBULLET"))
+
+        if (other.gameObject.CompareTag("PLAYERBULLET"))
         {
-            EnemycurHealth -= 2.0f;
-            
-            if(EnemycurHealth == 0.0f)
+            EnemycurHealth -= 1.0f;
+
+            if (EnemycurHealth <= 0.0f)
             {
                 Destroy(Fa);
             }
@@ -57,5 +66,8 @@ public class EnemyControll : MonoBehaviour
         float zMove = (moveSpeed * Time.deltaTime);
         transform.Translate(0, 0, zMove);
     }
-
+    void BulletClear()
+    {
+        Destroy(this.gameObject);
+    }
 }

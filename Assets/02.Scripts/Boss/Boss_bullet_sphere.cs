@@ -12,11 +12,11 @@ public class Boss_bullet_sphere : MonoBehaviour
 
     void OnEnable()
     {
-        Boss_Attack.OnBulletClear += BulletClear;
+        GameManager.onBulletClear += BulletClear;
     }
     void OnDisable()
     {
-        Boss_Attack.OnBulletClear -= BulletClear;
+        GameManager.onBulletClear -= BulletClear;
     }
 
     void BulletClear()

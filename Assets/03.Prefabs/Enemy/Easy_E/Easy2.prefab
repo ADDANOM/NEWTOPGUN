@@ -1,5 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!135 &2548657869233828853
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212810876106449629}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 3, z: 0}
+--- !u!135 &351510450022914612
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212810876926849116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 3, z: 0}
+--- !u!135 &165083323006342607
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212810877705629639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &3204632981225034475
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +79,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3204632981225034472}
     m_Modifications:
+    - target: {fileID: 2125707186, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2125707187, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -119,8 +162,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: A15-Beast
       objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314176, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314182, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314183, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
+--- !u!1 &2212810876106449629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3660405545445232663, guid: 8e3951f88be03154788dabd1fc72220e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3204632981458137802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2949332311757607118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 330740432394052100, guid: 8e3951f88be03154788dabd1fc72220e,
@@ -134,6 +198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3204632981225034472}
     m_Modifications:
+    - target: {fileID: 2125707186, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 330740432394052100, guid: 8e3951f88be03154788dabd1fc72220e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -209,8 +277,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: A15-Beast (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314176, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314182, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314183, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
+--- !u!1 &2212810877705629639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3660405545445232663, guid: 8e3951f88be03154788dabd1fc72220e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3204632981987770320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2949332310154370516 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 330740432394052100, guid: 8e3951f88be03154788dabd1fc72220e,
@@ -226,6 +315,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2125707186, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125707186, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
+      propertyPath: EnemycurHealth
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 330740432394052100, guid: 8e3951f88be03154788dabd1fc72220e,
@@ -303,8 +396,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: A15-Beast (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314176, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314182, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750649330373314183, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e3951f88be03154788dabd1fc72220e, type: 3}
+--- !u!1 &2212810876926849116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3660405545445232663, guid: 8e3951f88be03154788dabd1fc72220e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3204632982215876683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2949332310397190735 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 330740432394052100, guid: 8e3951f88be03154788dabd1fc72220e,

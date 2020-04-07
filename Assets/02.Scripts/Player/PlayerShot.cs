@@ -43,13 +43,10 @@ public class PlayerShot : MonoBehaviour
         {
             bombStock -= 1;
             Bomb.Play();
-            Boss_Attack.player_bomb();
+            GameManager.player_bomb();
             nextBomb = Time.time + bombRate;
+            boss_health.curBossHealth -= 500.0f;
 
-            if (boss_health.curBossHealth > 500.0f)
-                boss_health.curBossHealth -= 500.0f;
-            else
-                boss_health.BossDeath = true;
         }
 
     }

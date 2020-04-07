@@ -490,6 +490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3984693551982879377, guid: ce9ef31f821f5634b912cdd664014d9b, type: 3}
   pTr: {fileID: 8733605799810580370, guid: 81f7c8edf82b61846b8a6853556c6bc2, type: 3}
+  pTr_2: {fileID: 0}
+  pTr_3: {fileID: 0}
   firePos1: {fileID: 318654254}
   firePos2: {fileID: 819720285}
   pooledAmount: 20

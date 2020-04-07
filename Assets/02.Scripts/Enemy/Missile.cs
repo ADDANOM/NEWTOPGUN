@@ -5,11 +5,11 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     public Transform targetTr;  // 플레이어 타겟위치
-    
+
     public float minDist = 50.0f;  // 사정거리
     private float currDist = 0;  // 두 오브젝트의 거리
     public float rotDamping = 10.0f;  // 회전각도에 더해줄값 = 부드럽게
-    public float moveSpeed = 20.0f;
+    public float moveSpeed = 50.0f;
 
     //private GameObject bullet;
     private Transform missileTr;
@@ -17,9 +17,29 @@ public class Missile : MonoBehaviour
 
     void Start()
     {
+        Destroy(this.gameObject, 10.0f);
         //bullet = GetComponent<GameObject>();
         missileTr = transform;
-        targetTr = GameObject.FindGameObjectWithTag("Player").transform;
+
+        int targetSelect = Random.Range(0, 2);
+        if (targetSelect == 0)
+        {
+            targetTr = GameObject.Find("Player").transform;
+        }
+        else
+        {
+            targetTr = GameObject.Find("newPlayer").transform;
+        }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.onBulletClear += BulletClear;
+    }
+    private void OnDisable()
+    {
+        GameManager.onBulletClear -= BulletClear;
+
     }
 
     void Update()
@@ -40,4 +60,11 @@ public class Missile : MonoBehaviour
         }
         missileTr.Translate(Vector3.forward * Time.deltaTime * moveSpeed);  // 직진
     }
+
+    void BulletClear()
+    {
+        Destroy(this.gameObject);
+
+    }
+
 }

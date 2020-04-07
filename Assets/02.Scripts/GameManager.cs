@@ -5,8 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject BOSS;
+    GameObject spawnMgr;
+    Transform boss_tr;
+
     Boss_Attack bossAttack;
     Boss_Health boss_Health;
+
+    float timer;
 
 
     public static GameManager instans = null;  // 싱글턴 타입으로 만든다. 
@@ -16,23 +21,40 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instans = this;
 
+        instans = this;
     }
 
     void Start()
     {
+        spawnMgr = GameObject.Find("SpawnMgr").gameObject;
         BOSS = GameObject.Find("Boss_position").transform.Find("BOSS").gameObject;
+        boss_tr = GameObject.Find("Boss_position").GetComponent<Transform>();
+
+        spawnMgr.SetActive(false);
+        BOSS.SetActive(false);
+
         bossAttack = BOSS.GetComponent<Boss_Attack>();
         boss_Health = BOSS.GetComponent<Boss_Health>();
-
-        
-
+        timer = 0;
     }
-
-    void Update()
+    void FixedUpdate()
     {
-        bossPattern();        
+        timer = Time.time;
+
+        if (timer == 1.0f)
+        {
+            spawnMgr.SetActive(true);
+        }
+        else if (timer >= 60.0f && timer <=65.0f)
+        {
+            spawnMgr.SetActive(false);
+            BOSS.SetActive(true);
+            boss_tr.Translate(new Vector3(0.0f,5.0f,0.0f)*25*Time.deltaTime);
+        }
+        else if (timer > 65.0f)
+            bossPattern();
+
     }
 
     void bossPattern()
@@ -64,10 +86,17 @@ public class GameManager : MonoBehaviour
                 bossAttack.bossAttackPatern = 7;
         }
         else
-        bossAttack.bossAttackPatern = 0;
+            bossAttack.bossAttackPatern = 0;
 
     }
 
+    public delegate void enemyBulletClearHandler();
+    public static event enemyBulletClearHandler onBulletClear;
 
-    
+    public static void player_bomb()
+    {
+        onBulletClear();
+    }
+
+
 }
