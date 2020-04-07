@@ -14,11 +14,8 @@ public class PlayerMove : MonoBehaviour
     private float v, h;
     private ParticleSystem Booster_1;
     private ParticleSystem Booster_2;
-    private ParticleSystem Bomb;
     private ParticleSystem Shot;
-    private float nextBomb = 0.0f;
-    private float bombRate = 3.0f;
-    private Boss_Health boss_health;
+
 
 
     // 컨트롤러 체크
@@ -43,9 +40,8 @@ public class PlayerMove : MonoBehaviour
     //공격
     public bool onFire = false;
     public bool onBomb = false;
-    public GameObject mainshotPos;
-    public GameObject subshotPos_a;
-    public GameObject subshotPos_b;
+    PlayerShot playerShot;
+
 
     //심포디
     public int xPort; //좌석장비의 통신 포트
@@ -66,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 
         Booster_1 = transform.Find("FighterInterceptor").transform.Find("Booster_1").GetComponent<ParticleSystem>();
         Booster_2 = transform.Find("FighterInterceptor").transform.Find("Booster_2").GetComponent<ParticleSystem>();
-        Bomb = transform.Find("Bomb_Effect").GetComponent<ParticleSystem>();
+
         Shot = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
         Controller_Tr = transform.Find("[CameraRig]").transform.GetChild(1).transform.GetChild(1).GetComponent<Transform>();
         Controller_Tr2 = transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
@@ -74,7 +70,7 @@ public class PlayerMove : MonoBehaviour
         check_tr_1 = check_ctrl_left.GetComponent<Transform>();
         check_tr_2 = check_ctrl_right.GetComponent<Transform>();
 
-        boss_health = GameObject.Find("Boss_position").transform.Find("BOSS").GetComponent<Boss_Health>();
+        playerShot = GetComponent<PlayerShot>();
 
         xPort = Sym.Sym4D_X_Find();
         wPort = Sym.Sym4D_W_Find();
@@ -110,9 +106,7 @@ public class PlayerMove : MonoBehaviour
             {
                 Shot.Play();
             }
-            mainshotPos.GetComponent<PlayerFire>().enabled = true;
-            subshotPos_a.GetComponent<PlayerSubFire>().enabled = true;
-            subshotPos_b.GetComponent<PlayerSubFire>().enabled = true;
+            playerShot.shotEnable();
         }
         else
         {
@@ -120,24 +114,12 @@ public class PlayerMove : MonoBehaviour
             {
                 Shot.Stop();
             }
-            mainshotPos.GetComponent<PlayerFire>().enabled = false;
-            subshotPos_a.GetComponent<PlayerSubFire>().enabled = false;
-            subshotPos_b.GetComponent<PlayerSubFire>().enabled = false;
+            playerShot.shotDisable();
         }
-        if (onBomb && !Bomb.isPlaying)
+        if (onBomb)
         {
-            if (Time.time >= nextBomb)
-            {
-                Bomb.Play();
-                Boss_Attack.player_bomb();
-                nextBomb = Time.time + bombRate;
+            playerShot.doBomb();
 
-                if (boss_health.curBossHealth > 500.0f)
-                    boss_health.curBossHealth -= 500.0f;
-                else
-                    boss_health.BossDeath = true;
-
-            }
         }
 
     }
@@ -266,33 +248,6 @@ public class PlayerMove : MonoBehaviour
                 StartCoroutine(ChangeRollNPitch());
             }
         }
-
-        // if (check_ctrl == false)
-        // {
-        //     anim.SetFloat("Player_Side", 0);
-        //     anim.SetFloat("Player_Up", 0);
-        // }
-
-        // if (Controller_Tr.eulerAngles.y < 75) //..
-        // {
-        //     // moveUp = Time.deltaTime;
-        //     Debug.Log("small left");
-        //     turn_angle = Quaternion.Euler(0, -10f, 0);
-        //     transform.rotation = Quaternion.RotateTowards(transform.rotation, turn_angle, Time.deltaTime * 40f);
-        // }
-        // else if (Controller_Tr.eulerAngles.y > 105) //..
-        // {
-        //     // moveUp = -1.0f *Time.deltaTime;
-        //     Debug.Log("small right");
-        //     turn_angle = Quaternion.Euler(0, 10f, 0);
-        //     transform.rotation = Quaternion.RotateTowards(transform.rotation, turn_angle, Time.deltaTime * 40f);
-
-        // }
-        // else
-        // {
-        //     turn_angle = Quaternion.Euler(0, 0, 0);
-        //     transform.rotation = Quaternion.RotateTowards(transform.rotation, turn_angle, Time.deltaTime * 40f);
-        // }
 
     }
     IEnumerator ChangeRollNPitch()

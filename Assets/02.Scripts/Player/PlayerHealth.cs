@@ -13,12 +13,15 @@ public class PlayerHealth : MonoBehaviour
     MeshRenderer needRescue;
     ParticleSystem smoke;
     ParticleSystem repairParticle;
+    ParticleSystem fireEffect;
     float sliderHealth;
     float lastDamageTime;
     float lastRescueTime;
     float immotalTime;
     PlayerMove PlayerMove;
     Transform tr;
+
+    GameObject shotPos;
 
 
     private void Start()
@@ -29,6 +32,8 @@ public class PlayerHealth : MonoBehaviour
         needRescue = transform.Find("FighterInterceptor").transform.Find("Fuselage").GetComponent<MeshRenderer>();
         smoke = transform.Find("DestroySmoke").GetComponent<ParticleSystem>();
         repairParticle = transform.Find("RepairParticle").GetComponent<ParticleSystem>();
+        fireEffect = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
+        shotPos = transform.Find("ShotPos").gameObject;
     }
 
 
@@ -89,6 +94,8 @@ public class PlayerHealth : MonoBehaviour
         needRescue.material.color = new Color(1, 0, 0, 1);
         PlayerMove.enabled = false;
         smoke.Play();
+        fireEffect.Stop();
+        shotPos.SetActive(false);
     }
     void Repaired()
     {
@@ -98,6 +105,7 @@ public class PlayerHealth : MonoBehaviour
         PlayerMove.enabled = true;
         smoke.Stop();
         repairParticle.Play();
+        shotPos.SetActive(true);
     }
 
 }

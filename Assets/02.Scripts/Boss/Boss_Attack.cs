@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Boss_Attack : MonoBehaviour
 {
-    Transform player_tr_1; Transform player_tr_2;
+    Transform player_tr_1; Transform player_tr_2; Transform player_tr_3;
+    int targetSelect;
+    float selectTime;
     float lastShootTime_1, lastShootTime_2;
     public GameObject bullet_rice;
     public GameObject bullet_sphere;
@@ -34,8 +36,9 @@ public class Boss_Attack : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        player_tr_1 = GameObject.Find("Player").transform;
-        // Player_2 = GameObject.Find("Player(1)");
+        player_tr_2 = GameObject.Find("Player").transform;
+        player_tr_3 = GameObject.Find("newPlayer").transform;
+        player_tr_1 = player_tr_2;
 
         boss_attack_center_up = transform.Find("BOSS_Attackplaces").transform.Find("boss_attack_center_up").GetComponent<Transform>();
         boss_attack_center_right = transform.Find("BOSS_Attackplaces").transform.Find("boss_attack_center_right").GetComponent<Transform>();
@@ -56,9 +59,34 @@ public class Boss_Attack : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+
+
+        if (Time.time > selectTime + 5.0f)
+        {
+            selectTime = Time.time;
+            targetSelect = Random.Range(0, 2);
+            if (targetSelect == 0)
+            {
+                Debug.Log("1 select");
+                if(!player_tr_2.gameObject.GetComponent<PlayerHealth>().PlayerDeath)
+                player_tr_1 = player_tr_2;
+                else
+                player_tr_1 = player_tr_3;
+            }
+            else
+            {
+                Debug.Log("2 select");
+                if(!player_tr_3.gameObject.GetComponent<PlayerHealth>().PlayerDeath)
+                player_tr_1 = player_tr_3;
+                else
+                player_tr_1 = player_tr_2;
+            }
+        }
+
+        if (!player_tr_2.gameObject.GetComponent<PlayerHealth>().PlayerDeath || !player_tr_3.gameObject.GetComponent<PlayerHealth>().PlayerDeath)
         Boss_attackPattern();
-
-
+        else
+        player_bomb();
 
     }
 
