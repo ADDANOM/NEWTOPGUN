@@ -59,7 +59,7 @@ public class EnemyControll : MonoBehaviour
         {
             Debug.Log("SoWhan!!");
 
-            GameManager.instans.RandomItemBox();
+            // GameManager.instans.RandomItemBox();
         }
         else
         {
