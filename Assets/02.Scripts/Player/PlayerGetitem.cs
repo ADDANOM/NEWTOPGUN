@@ -37,9 +37,9 @@ public class PlayerGetitem : MonoBehaviour
         }
         else if (other.gameObject.name.Contains("Heal"))
         {
-            if (playerHealth.curPlayerHealth < 5 && playerHealth.curPlayerHealth > 0)
+            if (playerHealth.curPlayerHealth < 25 && playerHealth.curPlayerHealth > 0)
             {
-                playerHealth.curPlayerHealth += 1;
+                playerHealth.curPlayerHealth += 5;
             }
 
             if (playerHealth.curPlayerHealth > 0)
