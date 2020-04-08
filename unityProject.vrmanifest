@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.newtopgun.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\NEWTOPGUN\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\GitHub\\NEWTOPGUN\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "NEWTOPGUN [Testing]"
