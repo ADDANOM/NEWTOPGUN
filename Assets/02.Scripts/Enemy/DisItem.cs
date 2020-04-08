@@ -14,12 +14,9 @@ public class DisItem : MonoBehaviour
 
     public ParticleSystem ExPlosion;
 
-
     void Start()
     {
         tr = GetComponent<Transform>();
-
-       
 
     }
 
@@ -87,7 +84,6 @@ public class DisItem : MonoBehaviour
     void PlayParticle()
     {
         Instantiate(ExPlosion, pos, tr.rotation);
-        
 
         Destroy(ExPlosion,1.0f);
     }

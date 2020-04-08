@@ -1222,7 +1222,7 @@ MonoBehaviour:
   subshotPos_b_2: {fileID: 1368726740}
   shotLevel: 0
   bombStock: 0
-  P_ShotSounds: {fileID: 8300000, guid: efa78b975279da44babf38113982b18f, type: 3}
+  P_ShotSounds: {fileID: 8300000, guid: 7683c78428ad0934db847b37af6f9c2e, type: 3}
 --- !u!54 &680592122373078591
 Rigidbody:
   m_ObjectHideFlags: 0

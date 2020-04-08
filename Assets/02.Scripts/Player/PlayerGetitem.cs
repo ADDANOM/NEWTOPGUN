@@ -31,7 +31,7 @@ public class PlayerGetitem : MonoBehaviour
 
             if (playerHealth.curPlayerHealth > 0)
             {
-                Destroy(other.gameObject);
+                Destroy(other.gameObject,0.5f);
             }
             
         }
@@ -44,7 +44,7 @@ public class PlayerGetitem : MonoBehaviour
 
             if (playerHealth.curPlayerHealth > 0)
             {
-                Destroy(other.gameObject);
+                Destroy(other.gameObject,0.5f);
             }
         }
         else if (other.gameObject.name.Contains("Boom"))
@@ -56,7 +56,7 @@ public class PlayerGetitem : MonoBehaviour
 
             if (playerHealth.curPlayerHealth > 0)
             {
-                Destroy(other.gameObject);
+                Destroy(other.gameObject, 0.5f);
             }
         }
 

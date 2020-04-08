@@ -22,7 +22,7 @@ public class PlayerShot : MonoBehaviour
 
     private Boss_Health boss_health;
 
-    private AudioSource myShot;
+    private AudioSource ShotBoom;
     public AudioClip P_ShotSounds;
 
     private void Awake()
@@ -45,7 +45,7 @@ public class PlayerShot : MonoBehaviour
         bomb_3 = transform.Find("FighterInterceptor").transform.Find("BombPos").transform.Find("BOMB_missile_3").gameObject;
         bomb_4 = transform.Find("FighterInterceptor").transform.Find("BombPos").transform.Find("BOMB_missile_4").gameObject;
 
-        myShot = GetComponent<AudioSource>();
+        ShotBoom = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -121,12 +121,14 @@ public class PlayerShot : MonoBehaviour
         {
             bombStock -= 1;
             Bomb.Play();
+
+            ShotBoom.clip = P_ShotSounds;
+            ShotBoom.Play();
+
             GameManager.player_bomb();
             nextBomb = Time.time + bombRate;
             boss_health.curBossHealth -= 500.0f;
-            // 스킬공격
-            myShot.clip = P_ShotSounds;
-            myShot.Play();
+            
         }
 
     }
