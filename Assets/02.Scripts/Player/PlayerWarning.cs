@@ -22,14 +22,13 @@ public class PlayerWarning : MonoBehaviour
 
     void Start()
     {
-        _image = OutArea.GetComponent<Image>();
-        // _text = outscreen.transform.GetChild(0).GetComponent<TextMeshPro>();
-        warn_left = OutArea.transform.GetChild(0).gameObject;
-        warn_right = OutArea.transform.GetChild(1).gameObject;
-        warn_down = OutArea.transform.GetChild(2).gameObject;
-        warn_up = OutArea.transform.GetChild(3).gameObject;
-        warn_forward = OutArea.transform.GetChild(4).gameObject;
-        warn_backward = OutArea.transform.GetChild(5).gameObject;
+        _image = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("OutArea").GetComponent<Image>();
+        warn_left = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("OutArea").transform.GetChild(0).gameObject;
+        warn_right = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("OutArea").transform.GetChild(1).gameObject;
+        warn_down = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("OutArea").transform.GetChild(2).gameObject;
+        warn_up = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("OutArea").transform.GetChild(3).gameObject;
+        warn_forward = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("OutArea").transform.GetChild(4).gameObject;
+        warn_backward = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("OutArea").transform.GetChild(5).gameObject;
     }
 
 

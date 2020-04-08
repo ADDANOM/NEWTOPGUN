@@ -35,11 +35,11 @@ public class PlayerHealth : MonoBehaviour
         fireEffect = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
         shotPos = transform.Find("ShotPos").gameObject;
 
-        hp_1 = transform.Find("[CameraRig]").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_1").gameObject;
-        hp_2 = transform.Find("[CameraRig]").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_2").gameObject;
-        hp_3 = transform.Find("[CameraRig]").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_3").gameObject;
-        hp_4 = transform.Find("[CameraRig]").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_4").gameObject;
-        hp_5 = transform.Find("[CameraRig]").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_5").gameObject;
+        hp_1 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_1").gameObject;
+        hp_2 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_2").gameObject;
+        hp_3 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_3").gameObject;
+        hp_4 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_4").gameObject;
+        hp_5 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_5").gameObject;
 
         myaudio = GetComponent<AudioSource>();
     }
