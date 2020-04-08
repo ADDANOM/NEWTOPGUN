@@ -54,6 +54,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     private AudioSource myAudio;
     public AudioClip P_attack;
+    private FollowCam followCam;
 
     void Awake()
     {
@@ -81,6 +82,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         // wPort = Sym.Sym4D_W_Find();
 
         myAudio = GetComponent<AudioSource>();
+
+        if (photonView.IsMine)
+        {
+            followCam = Camera.main.GetComponent<FollowCam>();
+            followCam.target = tr;
+        }
     }
 
     // Update is called once per frame

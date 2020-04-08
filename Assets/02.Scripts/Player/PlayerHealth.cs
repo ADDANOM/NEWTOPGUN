@@ -9,12 +9,10 @@ public class PlayerHealth : MonoBehaviour
     public float curPlayerHealth;
     public bool PlayerDeath = false;
     public bool gameOver = false;
-    public Slider slider;
     MeshRenderer needRescue;
     ParticleSystem smoke;
     ParticleSystem repairParticle;
     ParticleSystem fireEffect;
-    float sliderHealth;
     float lastDamageTime;
     float lastRescueTime;
     float immotalTime;
@@ -31,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
         curPlayerHealth = 25.0f;
         tr = GetComponent<Transform>();
         PlayerMove = GetComponent<PlayerMove>();
-        sliderHealth = slider.value;
         needRescue = transform.Find("FighterInterceptor").transform.Find("Fuselage").GetComponent<MeshRenderer>();
         smoke = transform.Find("DestroySmoke").GetComponent<ParticleSystem>();
         repairParticle = transform.Find("RepairParticle").GetComponent<ParticleSystem>();
@@ -61,7 +58,6 @@ public class PlayerHealth : MonoBehaviour
             else
                 Destroyed();
         }
-        sliderHealth = curPlayerHealth;
 
         if (other.gameObject.name is "RepairZone" && PlayerDeath)
         {
