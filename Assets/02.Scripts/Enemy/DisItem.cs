@@ -39,7 +39,7 @@ public class DisItem : MonoBehaviour
     {
         float rand = Random.value;  // 0.0~1.0 이내의 랜덤값을 가져온다.
 
-        if (rand <= 0.035f)  // 30% 확률로 아이템 소환
+        if (rand <= 0.1f)  // 30% 확률로 아이템 소환
         {
             Debug.Log("SoWhan!!");
 

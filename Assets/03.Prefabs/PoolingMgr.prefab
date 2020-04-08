@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 2016919014741609743, guid: b11f77a00e7c88c43b09586a7b9effbc,
     type: 3}
-  pooledAmount: 20
+  pooledAmount: 30
   willGrow: 1
   pooledObjects: []
 --- !u!114 &4160653946376186190
@@ -63,6 +63,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 6340207570831065898, guid: 7f3c646d6f9c3ff47b3b060c73929ee5,
     type: 3}
-  pooledAmount: 20
+  pooledAmount: 40
   willGrow: 1
   pooledObjects: []

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Sym = Sym4D.Sym4DEmulator;
+using Photon.Pun;
 
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 {
     private Vector2 trackpad;
     private Transform tr;
@@ -85,18 +86,36 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
 
-        ctrl();
+        if (photonView.IsMine)
+        {
+            ctrl();
+            updateInput();
+            shot();
+            photonView.RPC("shot",RpcTarget.Others);
 
-        updateInput();
+            if (check_ctrl == true)
+                rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
 
-        if (check_ctrl == true)
-            rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
 
-        shot();
+        }
+        else
+        {
+            Vector3 pos = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 5.0f);
+            Quaternion rot = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 5.0f);
+
+            tr.position = pos;
+            tr.rotation = rot;
+
+        }
+
+
+
 
     }
 
+    [PunRPC]
     private void shot()
     {
         onFire = SteamVR_Actions._default.InteractUI.GetState(leftHand);
@@ -272,6 +291,25 @@ public class PlayerMove : MonoBehaviour
     void OnDestroy()
     {
         Sym.Sym4D_X_EndContents();
+    }
+
+
+    private Vector3 currPos;
+    private Quaternion currRot;
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(tr.position);
+            stream.SendNext(tr.rotation);
+        }
+        else
+        {
+            currPos = (Vector3)stream.ReceiveNext();
+            currRot = (Quaternion)stream.ReceiveNext();
+        }
+
     }
 
 
