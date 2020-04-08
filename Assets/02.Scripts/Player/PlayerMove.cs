@@ -68,8 +68,8 @@ public class PlayerMove : MonoBehaviour
         Booster_2 = transform.Find("FighterInterceptor").transform.Find("Booster_2").GetComponent<ParticleSystem>();
 
         Shot = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
-        Controller_Tr = transform.Find("[CameraRig]").transform.GetChild(1).transform.GetChild(1).GetComponent<Transform>();
-        Controller_Tr2 = transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
+        Controller_Tr = transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
+        Controller_Tr2 = transform.Find("[CameraRig]").transform.GetChild(1).transform.GetChild(1).GetComponent<Transform>();
 
         check_tr_1 = check_ctrl_left.GetComponent<Transform>();
         check_tr_2 = check_ctrl_right.GetComponent<Transform>();
@@ -95,16 +95,12 @@ public class PlayerMove : MonoBehaviour
 
         shot();
 
-        //Debug.Log(Controller_Tr.eulerAngles.y); // left / right
-        //Debug.Log(Controller_Tr.eulerAngles.y + " ; " + Controller_Tr2.eulerAngles.y); // up / down
-
-
     }
 
     private void shot()
     {
-        onFire = SteamVR_Actions._default.InteractUI.GetState(rightHand);
-        onBomb = SteamVR_Actions._default.InteractUI.GetState(leftHand);
+        onFire = SteamVR_Actions._default.InteractUI.GetState(leftHand);
+        onBomb = SteamVR_Actions._default.InteractUI.GetState(rightHand);
 
         if (onFire)
         {
@@ -159,7 +155,7 @@ public class PlayerMove : MonoBehaviour
 
 
         //trackpad = SteamVR_Actions._default.speedUp.GetAxis(rightHand);
-        forwardSpeed = -1.0f * _go; // moving forward , backward
+        forwardSpeed = 1.0f * _go; // moving forward , backward
 
         var main1 = Booster_1.main;
         var main2 = Booster_2.main;

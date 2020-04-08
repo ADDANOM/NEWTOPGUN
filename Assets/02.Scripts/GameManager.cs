@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject BOSS;
     GameObject spawnMgr;
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        PhotonNetwork.Instantiate("newPlayer", Vector3.zero, Quaternion.identity, 0, null);
+
         spawnMgr = GameObject.Find("SpawnMgr").gameObject;
         BOSS = GameObject.Find("Boss_position").transform.Find("BOSS").gameObject;
         boss_tr = GameObject.Find("Boss_position").GetComponent<Transform>();

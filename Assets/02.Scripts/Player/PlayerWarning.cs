@@ -33,13 +33,13 @@ public class PlayerWarning : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "AREA")
         {
             if (other.gameObject.name == "Zone_Up")
             {
-                if (transform.position.y < 200.0f)
+                if (transform.position.y > 200.0f)
                 {
                     Debug.Log("GO DOWN!");
                     warn_down.SetActive(true);
@@ -54,7 +54,7 @@ public class PlayerWarning : MonoBehaviour
             }
             else if (other.gameObject.name == "Zone_Down")
             {
-                if (transform.position.y > -200.0f)
+                if (transform.position.y < -200.0f)
                 {
                     Debug.Log("Go UP!");
                     warn_up.SetActive(true);
@@ -68,7 +68,7 @@ public class PlayerWarning : MonoBehaviour
             }
             else if (other.gameObject.name == "Zone_West")
             {
-                if (transform.position.x > -300.0f)
+                if (transform.position.x < -300.0f)
                 {
                     Debug.Log("Go RIGHT!");
                     warn_right.SetActive(true);
@@ -83,7 +83,7 @@ public class PlayerWarning : MonoBehaviour
             }
             else if (other.gameObject.name == "Zone_East")
             {
-                if (transform.position.x < 300.0f)
+                if (transform.position.x > 300.0f)
                 {
                     Debug.Log("Go LEFT!");
                     warn_left.SetActive(true);
@@ -98,7 +98,7 @@ public class PlayerWarning : MonoBehaviour
             }
             else if (other.gameObject.name == "Zone_North")
             {
-                if (transform.position.z < 800.0f)
+                if (transform.position.z > 800.0f)
                 {
                     Debug.Log("Go BACKWARD!");
                     warn_backward.SetActive(true);
@@ -113,7 +113,7 @@ public class PlayerWarning : MonoBehaviour
             }
             else if (other.gameObject.name == "Zone_South")
             {
-                if (transform.position.z > -200.0f)
+                if (transform.position.z < -200.0f)
                 {
                     Debug.Log("Go FORWARD!");
                     warn_forward.SetActive(true);
