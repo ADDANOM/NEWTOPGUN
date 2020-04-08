@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerFireAction : MonoBehaviour
 {
+    public AudioClip clip;
+    AudioSource _audio;
+
+    private void OnEnable()
+    {
+        _audio = GetComponent<AudioSource>();
+        _audio.clip = clip;
+        _audio.Play();
+    }
 
     void Update()
     {
