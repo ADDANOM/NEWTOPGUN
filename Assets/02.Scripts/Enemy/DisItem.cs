@@ -14,11 +14,13 @@ public class DisItem : MonoBehaviour
 
     public ParticleSystem ExPlosion;
 
+
     void Start()
     {
         tr = GetComponent<Transform>();
 
-        //ExPlosion = transform.Find("E_explosion").GetComponent<ParticleSystem>();
+       
+
     }
 
     // Update is called once per frame

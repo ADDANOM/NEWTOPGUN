@@ -4,6 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Sym = Sym4D.Sym4DEmulator;
 
+
 public class PlayerMove : MonoBehaviour
 {
     private Vector2 trackpad;
@@ -50,6 +51,9 @@ public class PlayerMove : MonoBehaviour
     float prevJoyX, prevJoyY;
     float currJoyX, currJoyY;
 
+    private AudioSource myAudio;
+    public AudioClip P_attack;
+
     void Awake()
     {
         v = 0.0f;
@@ -74,6 +78,8 @@ public class PlayerMove : MonoBehaviour
 
         xPort = Sym.Sym4D_X_Find();
         wPort = Sym.Sym4D_W_Find();
+
+        myAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -105,6 +111,9 @@ public class PlayerMove : MonoBehaviour
             if (!Shot.isPlaying)
             {
                 Shot.Play();
+
+                myAudio.clip = P_attack;
+                myAudio.Play();
             }
             playerShot.shotEnable();
         }

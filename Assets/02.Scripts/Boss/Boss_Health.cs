@@ -10,11 +10,15 @@ public class Boss_Health : MonoBehaviour
     ParticleSystem bossFire;
     Transform tr;
 
+    private AudioSource B_audio;
+
     private void Start()
     {
         tr = gameObject.transform.parent.GetComponent<Transform>();
         bossFire = GameObject.Find("BOSS_Fired").GetComponent<ParticleSystem>();
         curBossHealth = 20000.0f;
+
+        B_audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -30,6 +34,8 @@ public class Boss_Health : MonoBehaviour
         if (bossfall)
         {
             tr.Translate(new Vector3(0, -2.0f, 2.0f) * 40 * Time.deltaTime);
+
+            B_audio.Play();
 
             Destroy(tr.gameObject, 10.0f);
         }

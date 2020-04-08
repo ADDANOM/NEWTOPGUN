@@ -11,14 +11,14 @@ public class EnemyControll : MonoBehaviour
     public float EnemycurHealth = 10.0f;
     public bool isAlive = true;
 
-
-
-    private float timer;
+    private AudioSource E_audio;
 
 
     void Start()
     {
         Fa = transform.gameObject;
+
+        E_audio = GetComponent<AudioSource>();
 
     }
     void OnEnable()
@@ -33,10 +33,7 @@ public class EnemyControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
         EnenmyMove();
-
-
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -46,7 +43,8 @@ public class EnemyControll : MonoBehaviour
             //ExPlosion.Play();  // 체력 0이 되면 실행하면된다. / 지금은 바로실행됨;  
 
             Debug.Log("Destroy");
-            Destroy(Fa);
+            E_audio.Play();
+            Destroy(Fa,0.5f);
         }
 
         if (other.gameObject.CompareTag("PLAYERBULLET"))
@@ -55,7 +53,8 @@ public class EnemyControll : MonoBehaviour
 
             if (EnemycurHealth <= 0.0f)
             {
-                Destroy(Fa);
+                E_audio.Play();
+                Destroy(Fa,0.5f);
             }
 
         }

@@ -23,7 +23,8 @@ public class PlayerHealth : MonoBehaviour
     GameObject shotPos;
     GameObject hp_1, hp_2, hp_3, hp_4, hp_5;
 
-
+    private AudioSource myaudio;
+    public AudioClip P_DamagedSounds;
 
     private void Start()
     {
@@ -43,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
         hp_4 = transform.Find("[CameraRig]").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_4").gameObject;
         hp_5 = transform.Find("[CameraRig]").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_5").gameObject;
 
+        myaudio = GetComponent<AudioSource>();
     }
 
 
@@ -98,22 +100,37 @@ public class PlayerHealth : MonoBehaviour
             else if (curPlayerHealth > 15.0f)
             {
                 HP_4();
+                // 데미지 입었을때
+                myaudio.clip = P_DamagedSounds;
+                myaudio.Play();
             }
             else if (curPlayerHealth > 10.0f)
             {
                 HP_3();
+
+                myaudio.clip = P_DamagedSounds;
+                myaudio.Play();
             }
             else if (curPlayerHealth > 5.0f)
             {
                 HP_2();
+
+                myaudio.clip = P_DamagedSounds;
+                myaudio.Play();
             }
             else if (curPlayerHealth > 0.0f)
             {
                 HP_1();
+
+                myaudio.clip = P_DamagedSounds;
+                myaudio.Play();
             }
             else if (curPlayerHealth == 0.0f)
             {
                 HP_0();
+
+                myaudio.clip = P_DamagedSounds;
+                myaudio.Play();
             }
 
         }

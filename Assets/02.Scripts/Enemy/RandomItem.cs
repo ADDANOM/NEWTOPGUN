@@ -7,12 +7,14 @@ public class RandomItem : MonoBehaviour
     float MoveSpeed = 10.0f;
 
     GameObject item;
-
+    private AudioSource audios;
     
     // Start is called before the first frame update
     void Start()
     {
         item = transform.gameObject;
+
+        audios = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,15 @@ public class RandomItem : MonoBehaviour
 
         Destroy(item, 7.0f);
     }
-    
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            audios.Play();
+
+            Destroy(item, 0.5f);
+        }
+    }
+
 }

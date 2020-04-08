@@ -22,6 +22,8 @@ public class PlayerShot : MonoBehaviour
 
     private Boss_Health boss_health;
 
+    private AudioSource myShot;
+    public AudioClip P_ShotSounds;
 
     private void Awake()
     {
@@ -42,11 +44,13 @@ public class PlayerShot : MonoBehaviour
         bomb_2 = transform.Find("FighterInterceptor").transform.Find("BombPos").transform.Find("BOMB_missile_2").gameObject;
         bomb_3 = transform.Find("FighterInterceptor").transform.Find("BombPos").transform.Find("BOMB_missile_3").gameObject;
         bomb_4 = transform.Find("FighterInterceptor").transform.Find("BombPos").transform.Find("BOMB_missile_4").gameObject;
+
+        myShot = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-
+        
         if (preBombStock != bombStock)
         {
             if (bombStock > 3)
@@ -120,6 +124,9 @@ public class PlayerShot : MonoBehaviour
             GameManager.player_bomb();
             nextBomb = Time.time + bombRate;
             boss_health.curBossHealth -= 500.0f;
+            // 스킬공격
+            myShot.clip = P_ShotSounds;
+            myShot.Play();
         }
 
     }
