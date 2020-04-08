@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-using Sym = Sym4D.Sym4DEmulator;
+//using Sym = Sym4D.Sym4DEmulator;
 using Photon.Pun;
 
 
@@ -77,8 +77,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
         playerShot = GetComponent<PlayerShot>();
 
-        xPort = Sym.Sym4D_X_Find();
-        wPort = Sym.Sym4D_W_Find();
+        // xPort = Sym.Sym4D_X_Find();
+        // wPort = Sym.Sym4D_W_Find();
 
         myAudio = GetComponent<AudioSource>();
     }
@@ -93,7 +93,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             ctrl();
             updateInput();
             shot();
-            photonView.RPC("shot",RpcTarget.Others);
+            photonView.RPC("shot", RpcTarget.Others);
 
             if (check_ctrl == true)
                 rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
@@ -253,45 +253,45 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             anim.SetFloat("Player_Side", v);
             anim.SetFloat("Player_Up", h);
 
-            //심포디
-            currJoyX = v;
-            currJoyY = h;
-            Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
+            //     //심포디
+            //     currJoyX = v;
+            //     currJoyY = h;
+            //     Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
 
-            if (currJoyX != prevJoyX)
-            {
-                //Change Roll
-                prevJoyX = currJoyX;
-                StartCoroutine(ChangeRollNPitch());
-            }
+            //     if (currJoyX != prevJoyX)
+            //     {
+            //         //Change Roll
+            //         prevJoyX = currJoyX;
+            //         StartCoroutine(ChangeRollNPitch());
+            //     }
 
-            if (currJoyY != prevJoyY)
-            {
-                //Change Pitch
-                prevJoyY = currJoyY;
-                StartCoroutine(ChangeRollNPitch());
-            }
+            //     if (currJoyY != prevJoyY)
+            //     {
+            //         //Change Pitch
+            //         prevJoyY = currJoyY;
+            //         StartCoroutine(ChangeRollNPitch());
+            //     }
+            // }
         }
-
     }
-    IEnumerator ChangeRollNPitch()
-    {
+    // IEnumerator ChangeRollNPitch()
+    // {
 
-        yield return new WaitForSeconds(0.1f);
+    //     yield return new WaitForSeconds(0.1f);
 
-        //Sym4D-X100 COM Port Open  및 컨텐츠 시작을 장치에 전달
-        Sym.Sym4D_X_StartContents(xPort);
-        yield return new WaitForSeconds(0.1f);
+    //     //Sym4D-X100 COM Port Open  및 컨텐츠 시작을 장치에 전달
+    //     Sym.Sym4D_X_StartContents(xPort);
+    //     yield return new WaitForSeconds(0.1f);
 
-        Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 100), (int)(currJoyY * 100));
+    //     Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 100), (int)(currJoyY * 100));
 
-        yield return new WaitForSeconds(0.1f);
-    }
+    //     yield return new WaitForSeconds(0.1f);
+    // }
 
-    void OnDestroy()
-    {
-        Sym.Sym4D_X_EndContents();
-    }
+    // void OnDestroy()
+    // {
+    //     Sym.Sym4D_X_EndContents();
+    // }
 
 
     private Vector3 currPos;
