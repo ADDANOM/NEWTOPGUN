@@ -97,38 +97,10 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         {
             ctrl();
             updateInput();
-            if (check_ctrl)
-            {
-                anim.SetFloat("Player_Side", v);
-                anim.SetFloat("Player_Up", h);
-                //     //심포디
-                //     currJoyX = v;
-                //     currJoyY = h;
-                //     Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
-
-                //     if (currJoyX != prevJoyX)
-                //     {
-                //         //Change Roll
-                //         prevJoyX = currJoyX;
-                //         StartCoroutine(ChangeRollNPitch());
-                //     }
-
-                //     if (currJoyY != prevJoyY)
-                //     {
-                //         //Change Pitch
-                //         prevJoyY = currJoyY;
-                //         StartCoroutine(ChangeRollNPitch());
-                //     }
-                // }
-            }
-
+            flight_anim();
             shot();
-            photonView.RPC("shot", RpcTarget.Others, null);
-            photonView.RPC("test", RpcTarget.Others);
+            photonView.RPC("shot", RpcTarget.Others);
 
-
-            if (check_ctrl == true)
-                rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
 
         }
         else
@@ -142,12 +114,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
         }
     }
-    [PunRPC]
-    void test()
-    {
-        Debug.Log("hihihi");
-    }
-
 
     [PunRPC]
     private void shot()
@@ -181,6 +147,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         }
 
     }
+
+
 
     private void ctrl() // 컨트롤러를 제대로 쥐었는가 판단 
     {
@@ -308,6 +276,34 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     //     Sym.Sym4D_X_EndContents();
     // }
 
+    private void flight_anim()
+    {
+        if (check_ctrl)
+        {
+            rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
+            anim.SetFloat("Player_Side", v);
+            anim.SetFloat("Player_Up", h);
+            //     //심포디
+            //     currJoyX = v;
+            //     currJoyY = h;
+            //     Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
+
+            //     if (currJoyX != prevJoyX)
+            //     {
+            //         //Change Roll
+            //         prevJoyX = currJoyX;
+            //         StartCoroutine(ChangeRollNPitch());
+            //     }
+
+            //     if (currJoyY != prevJoyY)
+            //     {
+            //         //Change Pitch
+            //         prevJoyY = currJoyY;
+            //         StartCoroutine(ChangeRollNPitch());
+            //     }
+            // }
+        }
+    }
 
     private Vector3 currPos;
     private Quaternion currRot;
