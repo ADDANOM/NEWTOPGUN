@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
 
-public class PlayerWarning : MonoBehaviour
+public class PlayerWarning : MonoBehaviourPunCallbacks
 {
     public GameObject OutArea;
     // GameObject outscreen;
@@ -34,98 +35,102 @@ public class PlayerWarning : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "AREA")
+        if (photonView.IsMine)
         {
-            if (other.gameObject.name == "Zone_Up")
+            if (other.gameObject.tag == "AREA")
             {
-                if (transform.position.y > 200.0f)
+                if (other.gameObject.name == "Zone_Up")
                 {
-                    Debug.Log("GO DOWN!");
-                    warn_down.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
-                }
-                else
-                {
-                    warn_down.SetActive(false);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
-                }
+                    if (transform.position.y > 200.0f)
+                    {
+                        Debug.Log("GO DOWN!");
+                        warn_down.SetActive(true);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    }
+                    else
+                    {
+                        warn_down.SetActive(false);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
+                    }
 
-            }
-            else if (other.gameObject.name == "Zone_Down")
-            {
-                if (transform.position.y < -200.0f)
-                {
-                    Debug.Log("Go UP!");
-                    warn_up.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
                 }
-                else
+                else if (other.gameObject.name == "Zone_Down")
                 {
-                    warn_up.SetActive(false);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
+                    if (transform.position.y < -200.0f)
+                    {
+                        Debug.Log("Go UP!");
+                        warn_up.SetActive(true);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    }
+                    else
+                    {
+                        warn_up.SetActive(false);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
+                    }
                 }
-            }
-            else if (other.gameObject.name == "Zone_West")
-            {
-                if (transform.position.x < -300.0f)
+                else if (other.gameObject.name == "Zone_West")
                 {
-                    Debug.Log("Go RIGHT!");
-                    warn_right.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
-                }
-                else
-                {
-                    warn_right.SetActive(false);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
-                }
+                    if (transform.position.x < -300.0f)
+                    {
+                        Debug.Log("Go RIGHT!");
+                        warn_right.SetActive(true);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    }
+                    else
+                    {
+                        warn_right.SetActive(false);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
+                    }
 
-            }
-            else if (other.gameObject.name == "Zone_East")
-            {
-                if (transform.position.x > 300.0f)
-                {
-                    Debug.Log("Go LEFT!");
-                    warn_left.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
                 }
-                else
+                else if (other.gameObject.name == "Zone_East")
                 {
-                    warn_left.SetActive(false);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
-                }
+                    if (transform.position.x > 300.0f)
+                    {
+                        Debug.Log("Go LEFT!");
+                        warn_left.SetActive(true);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    }
+                    else
+                    {
+                        warn_left.SetActive(false);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
+                    }
 
-            }
-            else if (other.gameObject.name == "Zone_North")
-            {
-                if (transform.position.z > 800.0f)
-                {
-                    Debug.Log("Go BACKWARD!");
-                    warn_backward.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
                 }
-                else
+                else if (other.gameObject.name == "Zone_North")
                 {
-                    warn_backward.SetActive(false);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
-                }
+                    if (transform.position.z > 800.0f)
+                    {
+                        Debug.Log("Go BACKWARD!");
+                        warn_backward.SetActive(true);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    }
+                    else
+                    {
+                        warn_backward.SetActive(false);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
+                    }
 
-            }
-            else if (other.gameObject.name == "Zone_South")
-            {
-                if (transform.position.z < -200.0f)
-                {
-                    Debug.Log("Go FORWARD!");
-                    warn_forward.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
                 }
-                else
+                else if (other.gameObject.name == "Zone_South")
                 {
-                    warn_forward.SetActive(false);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
-                }
+                    if (transform.position.z < -200.0f)
+                    {
+                        Debug.Log("Go FORWARD!");
+                        warn_forward.SetActive(true);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    }
+                    else
+                    {
+                        warn_forward.SetActive(false);
+                        _image.color = new Color(0.2f, 0.0f, 1.0f, 0.0f);
+                    }
 
+                }
             }
         }
+
 
 
     }
