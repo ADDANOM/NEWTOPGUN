@@ -16,6 +16,7 @@ public class PlayerFire : MonoBehaviour
 
     void Fire()
     {
+        Debug.Log("hahahahaha");
         GameObject obj = PlayerFirePooler.current.GetPooledObejcr();
 
         if (obj == null)
