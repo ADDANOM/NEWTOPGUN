@@ -95,17 +95,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            photonView.RPC("shottest", RpcTarget.Others, null);
-
-
             ctrl();
             updateInput();
-
             if (check_ctrl)
             {
                 anim.SetFloat("Player_Side", v);
                 anim.SetFloat("Player_Up", h);
-
                 //     //심포디
                 //     currJoyX = v;
                 //     currJoyY = h;
@@ -129,6 +124,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
             shot();
             photonView.RPC("shot", RpcTarget.Others, null);
+            photonView.RPC("test", RpcTarget.Others);
+
 
             if (check_ctrl == true)
                 rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
@@ -145,15 +142,11 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
         }
     }
-
     [PunRPC]
-    void shottest()
+    void test()
     {
-        Shot.Play();
-        playerShot.shotEnable();
+        Debug.Log("hihihi");
     }
-
-
 
 
     [PunRPC]
@@ -206,6 +199,11 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     {
         moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
         moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
+
+        Debug.Log($"rightHand: {moveBehind}");
+
+        Debug.Log($"leftHand: {moveForward}");
+
         if (moveForward & !moveBehind)
             _go = 1.0f;
         else if (moveBehind & !moveForward)
