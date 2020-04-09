@@ -10,7 +10,7 @@ public class PlayerSubFire : MonoBehaviour
 
     private void OnEnable()
     {
-        InvokeRepeating("Fire", fireTime, fireTime);
+        InvokeRepeating("Fire", 0.05f, fireTime);
     }
 
     void Fire()
