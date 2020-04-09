@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviourPunCallbacks
 {
     float prePlayerHealth;
     public float curPlayerHealth;
@@ -27,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         curPlayerHealth = 25.0f;
+
         tr = GetComponent<Transform>();
         PlayerMove = GetComponent<PlayerMove>();
         needRescue = transform.Find("FighterInterceptor").transform.Find("Fuselage").GetComponent<MeshRenderer>();
@@ -42,6 +44,8 @@ public class PlayerHealth : MonoBehaviour
         hp_5 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_5").gameObject;
 
         myaudio = GetComponent<AudioSource>();
+
+
     }
 
 
@@ -87,6 +91,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+
         if (prePlayerHealth != curPlayerHealth)
         {
             if (curPlayerHealth > 20.0f)

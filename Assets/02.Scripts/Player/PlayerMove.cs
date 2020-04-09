@@ -111,12 +111,23 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
             if (onFire_other)
             {
+                myAudio.clip = P_attack;
+                myAudio.Play();
+                if (!Shot.isPlaying)
+                {
+                    Shot.Play();
+                }
                 playerShot.shotEnable();
             }
             else
             {
+                if (Shot.isPlaying)
+                {
+                    Shot.Stop();
+                }
                 playerShot.shotDisable();
             }
+
             if (onBomb_other)
             {
                 playerShot.doBomb();
