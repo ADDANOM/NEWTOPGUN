@@ -11,12 +11,12 @@ public class PlayerFire : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("hahaha");
         InvokeRepeating("Fire", fireTime, fireTime);
     }
 
     void Fire()
     {
-        Debug.Log("hahahahaha");
         GameObject obj = PlayerFirePooler.current.GetPooledObejcr();
 
         if (obj == null)
