@@ -7,8 +7,6 @@ public class PlayerFire : MonoBehaviour
 {
     float lastShot;
 
-    public float fireTime = 0.2f;
-
     private void Start()
     {
         lastShot = Time.time;

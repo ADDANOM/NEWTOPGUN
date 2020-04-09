@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class PlayerSubFire : MonoBehaviour
 {
+    float lastShot;
 
-    public float fireTime = 0.5f;
-
-
-    private void OnEnable()
+    private void Start()
     {
-        InvokeRepeating("Fire", 0.05f, fireTime);
+        lastShot = Time.time;
+    }
+
+    private void Update()
+    {
+        //InvokeRepeating("Fire", 0.05f, fireTime);
+        if (Time.time > lastShot + 0.5f)
+        {
+            lastShot = Time.time;
+            Fire();
+        }
     }
 
     void Fire()
@@ -25,9 +33,9 @@ public class PlayerSubFire : MonoBehaviour
         obj.SetActive(true);
 
     }
-    public void OnDisable()
-    {
-        CancelInvoke();
-    }
+    // public void OnDisable()
+    // {
+    //     CancelInvoke();
+    // }
 
 }
