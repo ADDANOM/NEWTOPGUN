@@ -100,11 +100,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             ctrl();
             updateInput();
             shot();
-            photonView.RPC("shot", RpcTarget.Others);
+            photonView.RPC("shot", RpcTarget.Others, null);
 
             if (check_ctrl == true)
                 rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
 
+            photonView.RPC("test", RpcTarget.Others, null);
 
         }
         else
@@ -116,11 +117,20 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             tr.rotation = rot;
 
         }
+    }
 
+    [PunRPC]
+    void test()
+    {
+        if (PhotonNetwork.IsMasterClient)
+            Debug.Log("master");
 
-
+        if (!PhotonNetwork.IsMasterClient)
+            Debug.Log("other");
 
     }
+
+
 
     [PunRPC]
     private void shot()
@@ -130,8 +140,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
         if (onFire)
         {
-                myAudio.clip = P_attack;
-                myAudio.Play();
+            myAudio.clip = P_attack;
+            myAudio.Play();
             if (!Shot.isPlaying)
             {
                 Shot.Play();
