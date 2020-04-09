@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Valve.VR;
+using Valve.VR;
 //using Sym = Sym4D.Sym4DEmulator;
 using Photon.Pun;
 
@@ -36,8 +36,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     bool moveBehind;
     float _go;
     public float speed = 50.0f;
-    // public SteamVR_Input_Sources leftHand;
-    // public SteamVR_Input_Sources rightHand;
+    public SteamVR_Input_Sources leftHand;
+    public SteamVR_Input_Sources rightHand;
 
     //공격
     public bool onFire = false;
@@ -70,8 +70,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         Booster_2 = transform.Find("FighterInterceptor").transform.Find("Booster_2").GetComponent<ParticleSystem>();
 
         Shot = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
-        // Controller_Tr = transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
-        // Controller_Tr2 = transform.Find("[CameraRig]").transform.GetChild(1).transform.GetChild(1).GetComponent<Transform>();
+        Controller_Tr = transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
+        Controller_Tr2 = transform.Find("[CameraRig]").transform.GetChild(1).transform.GetChild(1).GetComponent<Transform>();
 
         check_tr_1 = check_ctrl_left.GetComponent<Transform>();
         check_tr_2 = check_ctrl_right.GetComponent<Transform>();
@@ -97,6 +97,9 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
         if (photonView.IsMine)
         {
+            photonView.RPC("shottest", RpcTarget.Others, null);
+
+
             ctrl();
             updateInput();
             shot();
@@ -120,10 +123,20 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
+    void shottest()
+    {
+        Shot.Play();
+        playerShot.shotEnable();
+    }
+
+
+
+
+    [PunRPC]
     private void shot()
     {
-        // onFire = SteamVR_Actions._default.InteractUI.GetState(leftHand);
-        // onBomb = SteamVR_Actions._default.InteractUI.GetState(rightHand);
+        onFire = SteamVR_Actions._default.InteractUI.GetState(leftHand);
+        onBomb = SteamVR_Actions._default.InteractUI.GetState(rightHand);
 
         if (onFire)
         {
@@ -167,8 +180,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     private void updateInput()
     {
-        // moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
-        // moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
+        moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
+        moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
         if (moveForward & !moveBehind)
             _go = 1.0f;
         else if (moveBehind & !moveForward)
@@ -177,6 +190,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             _go = 0.0f;
 
 
+        //trackpad = SteamVR_Actions._default.speedUp.GetAxis(rightHand);
         forwardSpeed = 1.0f * _go; // moving forward , backward
 
         var main1 = Booster_1.main;
