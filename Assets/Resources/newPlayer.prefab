@@ -29025,7 +29025,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2521258803435090932
+--- !u!114 &1359238905548045843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29067,7 +29067,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 2521258803435090932}
+  - {fileID: 1359238905548045843}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -29118,7 +29118,6 @@ GameObject:
   - component: {fileID: 1459422325910820296}
   - component: {fileID: 7207195374211346358}
   - component: {fileID: 6834538733105621407}
-  - component: {fileID: 3284457603565571532}
   m_Layer: 0
   m_Name: newPlayer
   m_TagString: Player
@@ -29362,25 +29361,10 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 3284457603565571532}
+  - {fileID: 7887184949652274554}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3284457603565571532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7887184949652274552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!1001 &99700213602591082
 PrefabInstance:
   m_ObjectHideFlags: 0
