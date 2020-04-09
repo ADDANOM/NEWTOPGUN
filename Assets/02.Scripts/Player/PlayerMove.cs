@@ -93,8 +93,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!photonView.IsMine) return;
-
         if (photonView.IsMine)
         {
             photonView.RPC("shottest", RpcTarget.Others, null);

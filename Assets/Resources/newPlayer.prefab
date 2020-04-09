@@ -29177,8 +29177,8 @@ MonoBehaviour:
   check_ctrl_left: {fileID: 1459422326663329750}
   check_ctrl_right: {fileID: 1459422326461248826}
   speed: 50
-  leftHand: 1
-  rightHand: 2
+  leftHand: 0
+  rightHand: 0
   onFire: 0
   onBomb: 0
   xPort: 0
