@@ -161,10 +161,11 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             }
             playerShot.shotDisable();
         }
+
         if (onBomb)
         {
+            if (photonView.IsMine)
             playerShot.doBomb();
-
         }
 
     }

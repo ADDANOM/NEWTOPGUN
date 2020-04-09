@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerShot : MonoBehaviour
+public class PlayerShot : MonoBehaviourPunCallbacks
 {
     public GameObject mainshotPos;
     public GameObject subshotPos_a;
