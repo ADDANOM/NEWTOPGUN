@@ -100,17 +100,27 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             flight_anim();
             shot();
             photonView.RPC("shot", RpcTarget.Others);
-
-
         }
         else
         {
-
             Vector3 pos = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 5.0f);
             Quaternion rot = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 5.0f);
 
             tr.position = pos;
             tr.rotation = rot;
+
+            if (onFire_other)
+            {
+                playerShot.shotEnable();
+            }
+            else
+            {
+                playerShot.shotDisable();
+            }
+            if (onBomb_other)
+            {
+                playerShot.doBomb();
+            }
 
         }
     }
@@ -308,19 +318,24 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 currPos;
     private Quaternion currRot;
 
+    bool onFire_other;
+    bool onBomb_other;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
             stream.SendNext(tr.position);
             stream.SendNext(tr.rotation);
-
+            stream.SendNext(onFire);
+            stream.SendNext(onBomb);
         }
         else
         {
             currPos = (Vector3)stream.ReceiveNext();
             currRot = (Quaternion)stream.ReceiveNext();
-
+            onFire_other = (bool)stream.ReceiveNext();
+            onBomb_other = (bool)stream.ReceiveNext();
         }
 
     }
