@@ -11,8 +11,7 @@ public class PlayerFire : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("hahaha");
-        InvokeRepeating("Fire", fireTime, fireTime);
+        InvokeRepeating("Fire", 0.05f, fireTime);
     }
 
     void Fire()
