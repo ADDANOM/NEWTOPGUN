@@ -100,6 +100,33 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
             ctrl();
             updateInput();
+
+            if (check_ctrl)
+            {
+                anim.SetFloat("Player_Side", v);
+                anim.SetFloat("Player_Up", h);
+
+                //     //심포디
+                //     currJoyX = v;
+                //     currJoyY = h;
+                //     Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
+
+                //     if (currJoyX != prevJoyX)
+                //     {
+                //         //Change Roll
+                //         prevJoyX = currJoyX;
+                //         StartCoroutine(ChangeRollNPitch());
+                //     }
+
+                //     if (currJoyY != prevJoyY)
+                //     {
+                //         //Change Pitch
+                //         prevJoyY = currJoyY;
+                //         StartCoroutine(ChangeRollNPitch());
+                //     }
+                // }
+            }
+
             shot();
             photonView.RPC("shot", RpcTarget.Others, null);
 
@@ -109,6 +136,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
+
             Vector3 pos = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 5.0f);
             Quaternion rot = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 5.0f);
 
@@ -261,31 +289,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
                 h += 0.02f;
         }
 
-        if (check_ctrl)
-        {
-            anim.SetFloat("Player_Side", v);
-            anim.SetFloat("Player_Up", h);
 
-            //     //심포디
-            //     currJoyX = v;
-            //     currJoyY = h;
-            //     Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
-
-            //     if (currJoyX != prevJoyX)
-            //     {
-            //         //Change Roll
-            //         prevJoyX = currJoyX;
-            //         StartCoroutine(ChangeRollNPitch());
-            //     }
-
-            //     if (currJoyY != prevJoyY)
-            //     {
-            //         //Change Pitch
-            //         prevJoyY = currJoyY;
-            //         StartCoroutine(ChangeRollNPitch());
-            //     }
-            // }
-        }
     }
     // IEnumerator ChangeRollNPitch()
     // {
@@ -316,11 +320,13 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(tr.position);
             stream.SendNext(tr.rotation);
+
         }
         else
         {
             currPos = (Vector3)stream.ReceiveNext();
             currRot = (Quaternion)stream.ReceiveNext();
+
         }
 
     }
