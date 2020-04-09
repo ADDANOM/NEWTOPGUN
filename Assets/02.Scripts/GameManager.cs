@@ -21,14 +21,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
 
-    private void Awake()
+    void Awake()
     {
-
         instans = this;
-    }
-
-    void Start()
-    {
         PhotonNetwork.Instantiate("newPlayer", Vector3.zero, Quaternion.identity, 0, null);
 
         spawnMgr = GameObject.Find("SpawnMgr").gameObject;
@@ -44,17 +39,17 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     void FixedUpdate()
     {
-        timer = Time.time;
+        timer = Time.timeSinceLevelLoad;
 
-        if (timer == 1.0f)
+        if (timer >= 1.0f && timer <= 60.0f)
         {
             spawnMgr.SetActive(true);
         }
-        else if (timer >= 60.0f && timer <=65.0f)
+        else if (timer >= 60.0f && timer <= 65.0f)
         {
             spawnMgr.SetActive(false);
             BOSS.SetActive(true);
-            boss_tr.Translate(new Vector3(0.0f,5.0f,0.0f)*25*Time.deltaTime);
+            boss_tr.Translate(new Vector3(0.0f, 5.0f, 0.0f) * 25 * Time.deltaTime);
         }
         else if (timer > 65.0f)
             bossPattern();

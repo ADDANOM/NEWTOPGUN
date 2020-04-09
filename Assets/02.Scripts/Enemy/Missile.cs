@@ -15,20 +15,28 @@ public class Missile : MonoBehaviour
     private Transform missileTr;
     private bool isPassed = false;  // 지나갔는지 여부
 
+    List<GameObject> players = new List<GameObject>();
+
     void Start()
     {
         Destroy(this.gameObject, 10.0f);
         //bullet = GetComponent<GameObject>();
         missileTr = transform;
 
+
+        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        if (players.Count == 1)
+        players.Add(GameObject.FindGameObjectWithTag("Player"));
+
+
         int targetSelect = Random.Range(0, 2);
         if (targetSelect == 0)
         {
-            targetTr = GameObject.Find("Player").transform;
+            targetTr = players[0].transform;
         }
         else
         {
-            targetTr = GameObject.Find("newPlayer").transform;
+            targetTr = players[1].transform;
         }
     }
 
