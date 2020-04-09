@@ -108,8 +108,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             if (check_ctrl == true)
                 rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
 
-            photonView.RPC("test", RpcTarget.Others, null);
-
         }
         else
         {
