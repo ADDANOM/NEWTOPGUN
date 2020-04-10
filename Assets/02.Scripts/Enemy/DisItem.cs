@@ -9,10 +9,13 @@ public class DisItem : MonoBehaviour
     Transform tr;
 
     public GameObject Boom;
-    public GameObject Lazer;
+    public GameObject Heal;
     public GameObject Missile;
 
     public ParticleSystem ExPlosion;
+
+    int ranArray_0;
+    int ranArray_1;
 
     void Start()
     {
@@ -23,6 +26,8 @@ public class DisItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ranArray_0 = GameManager.ranArray[1];
+        ranArray_1 = GameManager.ranArray[2];
         //Debug.Log($"tr = {tr.position}");
     }
 
@@ -37,47 +42,33 @@ public class DisItem : MonoBehaviour
 
     void RandomItemSpawn()
     {
-        float rand = Random.value;  // 0.0~1.0 이내의 랜덤값을 가져온다.
+        int rand = ranArray_0;  // 0.0~1.0 이내의 랜덤값을 가져온다.
 
-        if (rand <= 0.1f)  // 30% 확률로 아이템 소환
+        if (rand <= 1)  // 10% 확률로 아이템 소환
         {
-            Debug.Log("SoWhan!!");
-
             RandomItemBox();
         }
-        else
-        {
-            return;
-        }
+
     }
 
     void RandomItemBox()
     {
         Debug.Log("Check");
 
-        float rand = Random.value;
 
-        if (rand < 0.09f)  // 10% Boom 아이템 소환
+        if (ranArray_1 < 2)  // 20% Boom 아이템 소환
         {
-            Debug.Log("Boom");
             Instantiate(Boom, pos, tr.rotation);
-            
+
         }
-        else if (rand < 0.4f)  //  30% 확률로 레이저 소환
+        else if (ranArray_1 < 6)  //  40% 확률로 힐 소환
         {
-            Debug.Log("Lazer");
-            Instantiate(Lazer, pos, tr.rotation);
-           
+            Instantiate(Heal, pos, tr.rotation);
+
         }
-        else if (rand < 0.8f)  // 40% 확률
+        else  //  40% 확률로 서브미사일 소환
         {
-            Debug.Log("Missile");
             Instantiate(Missile, pos, tr.rotation);
-           
-        }
-        else
-        {
-            return;
         }
     }
 
@@ -85,6 +76,6 @@ public class DisItem : MonoBehaviour
     {
         Instantiate(ExPlosion, pos, tr.rotation);
 
-        Destroy(ExPlosion,1.0f);
+        Destroy(ExPlosion, 1.0f);
     }
 }

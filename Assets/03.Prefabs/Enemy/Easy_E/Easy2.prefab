@@ -450,6 +450,12 @@ PrefabInstance:
       propertyPath: ExploClip
       value: 
       objectReference: {fileID: 8300000, guid: 4e0057574191a4841aba15c6bd53aff6, type: 3}
+    - target: {fileID: 658510690207271807, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: Heal
+      value: 
+      objectReference: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a,
+        type: 3}
     - target: {fileID: 3660405545445232663, guid: 8e3951f88be03154788dabd1fc72220e,
         type: 3}
       propertyPath: m_Name
@@ -570,6 +576,12 @@ PrefabInstance:
       propertyPath: ExploClip
       value: 
       objectReference: {fileID: 8300000, guid: 4e0057574191a4841aba15c6bd53aff6, type: 3}
+    - target: {fileID: 658510690207271807, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: Heal
+      value: 
+      objectReference: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a,
+        type: 3}
     - target: {fileID: 3660405545445232663, guid: 8e3951f88be03154788dabd1fc72220e,
         type: 3}
       propertyPath: m_Name
@@ -694,6 +706,12 @@ PrefabInstance:
       propertyPath: ExploClip
       value: 
       objectReference: {fileID: 8300000, guid: 4e0057574191a4841aba15c6bd53aff6, type: 3}
+    - target: {fileID: 658510690207271807, guid: 8e3951f88be03154788dabd1fc72220e,
+        type: 3}
+      propertyPath: Heal
+      value: 
+      objectReference: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a,
+        type: 3}
     - target: {fileID: 3660405545445232663, guid: 8e3951f88be03154788dabd1fc72220e,
         type: 3}
       propertyPath: m_Name
