@@ -20,6 +20,11 @@ public class SelectCharactor : MonoBehaviour
 
     void Update()
     {
+        SelectChar();
+    }
+
+    public void SelectChar()
+    {
         if (bTurnLeft)
         {
             charactorNum++;
@@ -27,7 +32,7 @@ public class SelectCharactor : MonoBehaviour
                 charactorNum = 0;
 
             value -= 90;
-            
+
             bTurnLeft = false;
         }
         if (bTurnRight)
@@ -37,13 +42,12 @@ public class SelectCharactor : MonoBehaviour
                 charactorNum = 3;
 
             value += 90;
-            
+
             bTurnRight = false;
         }
         turn.eulerAngles = new Vector3(0, value, 0);  // 각을 설정
-        
-        transform.rotation = Quaternion.Slerp(transform.rotation, turn, Time.deltaTime * 5.0f);  // 부드럽게 돌려준다.
-        
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, turn, Time.deltaTime * 5.0f);  //
     }
 
     public void turnLeft()  // 다른 버튼 누를 때 까지 설정
