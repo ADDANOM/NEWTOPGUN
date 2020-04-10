@@ -97,7 +97,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (photonView.IsMine && !playerHealth.PlayerDeath)
+        if (photonView.IsMine)
         {
             ctrl();
             updateInput();
@@ -147,33 +147,36 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         onBomb = SteamVR_Actions._default.InteractUI.GetState(rightHand);
         health = playerHealth.curPlayerHealth;
         death = playerHealth.PlayerDeath;
-                
 
-        if (onFire)
+        if (!playerHealth.PlayerDeath)
         {
-            myAudio.clip = P_attack;
-            myAudio.Play();
-            if (!Shot.isPlaying)
+            if (onFire)
             {
-                Shot.Play();
+                myAudio.clip = P_attack;
+                myAudio.Play();
+                if (!Shot.isPlaying)
+                {
+                    Shot.Play();
 
+                }
+                playerShot.shotEnable();
             }
-            playerShot.shotEnable();
-        }
-        else
-        {
-            if (Shot.isPlaying)
+            else
             {
-                Shot.Stop();
+                if (Shot.isPlaying)
+                {
+                    Shot.Stop();
+                }
+                playerShot.shotDisable();
             }
-            playerShot.shotDisable();
+
+            if (onBomb)
+            {
+                if (photonView.IsMine)
+                    playerShot.doBomb();
+            }
         }
 
-        if (onBomb)
-        {
-            if (photonView.IsMine)
-            playerShot.doBomb();
-        }
 
     }
 
@@ -194,91 +197,97 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     private void updateInput()
     {
-        moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
-        moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
 
-        if (moveForward & !moveBehind)
-            _go = 1.0f;
-        else if (moveBehind & !moveForward)
-            _go = -1.0f;
-        else
-            _go = 0.0f;
-
-
-        //trackpad = SteamVR_Actions._default.speedUp.GetAxis(rightHand);
-        forwardSpeed = 1.0f * _go; // moving forward , backward
-
-        var main1 = Booster_1.main;
-        var main2 = Booster_2.main;
-        if (forwardSpeed < 0)
+        if (!playerHealth.PlayerDeath)
         {
-            main1.startColor = new Color(1.0f, 0.51f, 0.31f, 0.0f);
-            main2.startColor = new Color(1.0f, 0.51f, 0.31f, 0.0f);
+            moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
+            moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
+
+            if (moveForward & !moveBehind)
+                _go = 1.0f;
+            else if (moveBehind & !moveForward)
+                _go = -1.0f;
+            else
+                _go = 0.0f;
+
+
+            //trackpad = SteamVR_Actions._default.speedUp.GetAxis(rightHand);
+            forwardSpeed = 1.0f * _go; // moving forward , backward
+
+            var main1 = Booster_1.main;
+            var main2 = Booster_2.main;
+            if (forwardSpeed < 0)
+            {
+                main1.startColor = new Color(1.0f, 0.51f, 0.31f, 0.0f);
+                main2.startColor = new Color(1.0f, 0.51f, 0.31f, 0.0f);
+            }
+            else if (forwardSpeed == 0)
+            {
+                main1.startColor = new Color(1.0f, 0.51f, 0.31f, 0.5f);
+                main2.startColor = new Color(1.0f, 0.51f, 0.31f, 0.5f);
+            }
+            else
+            {
+                main1.startColor = new Color(0.04f, 0.26f, 1.00f, 0.5f);
+                main2.startColor = new Color(0.04f, 0.26f, 1.00f, 0.5f);
+            }
+
+            if (Controller_Tr.eulerAngles.x >= 300 && Controller_Tr.eulerAngles.x <= 350 && Controller_Tr.eulerAngles.y < 105) // left
+            {
+                if (v >= -0.98f)
+                    v -= 0.02f;
+                moveSide = -1.0f * Time.deltaTime;
+
+
+            }
+            else if (Controller_Tr.eulerAngles.x >= 10 && Controller_Tr.eulerAngles.x <= 50 && Controller_Tr.eulerAngles.y > 75) // right
+            {
+                if (v <= 0.98f)
+                    v += 0.02f;
+                moveSide = Time.deltaTime;
+
+
+            }
+            else
+            {
+                moveSide = 0.0f;
+                if (v > 0.0f)
+                    v -= 0.02f;
+                else if (v < 0.0f)
+                    v += 0.02f;
+
+
+            }
+
+
+
+            if (Controller_Tr.eulerAngles.z < 270) // up
+            {
+                if (h <= 0.98f)
+                    h += 0.02f;
+                moveUp = Time.deltaTime;
+
+
+            }
+            else if (Controller_Tr.eulerAngles.z > 295) // down
+            {
+                if (h >= -0.98f)
+                    h -= 0.02f;
+                moveUp = -1.0f * Time.deltaTime;
+
+
+            }
+            else
+            {
+                moveUp = 0.0f;
+                if (h > 0.0f)
+                    h -= 0.02f;
+                else if (h < 0.0f)
+                    h += 0.02f;
+            }
         }
-        else if (forwardSpeed == 0)
-        {
-            main1.startColor = new Color(1.0f, 0.51f, 0.31f, 0.5f);
-            main2.startColor = new Color(1.0f, 0.51f, 0.31f, 0.5f);
-        }
-        else
-        {
-            main1.startColor = new Color(0.04f, 0.26f, 1.00f, 0.5f);
-            main2.startColor = new Color(0.04f, 0.26f, 1.00f, 0.5f);
-        }
-
-        if (Controller_Tr.eulerAngles.x >= 300 && Controller_Tr.eulerAngles.x <= 350 && Controller_Tr.eulerAngles.y < 105) // left
-        {
-            if (v >= -0.98f)
-                v -= 0.02f;
-            moveSide = -1.0f * Time.deltaTime;
 
 
-        }
-        else if (Controller_Tr.eulerAngles.x >= 10 && Controller_Tr.eulerAngles.x <= 50 && Controller_Tr.eulerAngles.y > 75) // right
-        {
-            if (v <= 0.98f)
-                v += 0.02f;
-            moveSide = Time.deltaTime;
-
-
-        }
-        else
-        {
-            moveSide = 0.0f;
-            if (v > 0.0f)
-                v -= 0.02f;
-            else if (v < 0.0f)
-                v += 0.02f;
-
-
-        }
-
-
-
-        if (Controller_Tr.eulerAngles.z < 270) // up
-        {
-            if (h <= 0.98f)
-                h += 0.02f;
-            moveUp = Time.deltaTime;
-
-
-        }
-        else if (Controller_Tr.eulerAngles.z > 295) // down
-        {
-            if (h >= -0.98f)
-                h -= 0.02f;
-            moveUp = -1.0f * Time.deltaTime;
-
-
-        }
-        else
-        {
-            moveUp = 0.0f;
-            if (h > 0.0f)
-                h -= 0.02f;
-            else if (h < 0.0f)
-                h += 0.02f;
-        }
 
 
     }
@@ -303,31 +312,35 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     private void flight_anim()
     {
-        if (check_ctrl)
+        if (!playerHealth.PlayerDeath)
         {
-            rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
-            anim.SetFloat("Player_Side", v);
-            anim.SetFloat("Player_Up", h);
-            //     //심포디
-            //     currJoyX = v;
-            //     currJoyY = h;
-            //     Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
+            if (check_ctrl)
+            {
+                rg.MovePosition(transform.position + transform.forward * forwardSpeed + transform.right * moveSide * speed + transform.up * moveUp * speed);
+                anim.SetFloat("Player_Side", v);
+                anim.SetFloat("Player_Up", h);
+                //     //심포디
+                //     currJoyX = v;
+                //     currJoyY = h;
+                //     Debug.Log($"X={(int)(-currJoyX * 100)} / Y={(int)(currJoyY * 100)}");
 
-            //     if (currJoyX != prevJoyX)
-            //     {
-            //         //Change Roll
-            //         prevJoyX = currJoyX;
-            //         StartCoroutine(ChangeRollNPitch());
-            //     }
+                //     if (currJoyX != prevJoyX)
+                //     {
+                //         //Change Roll
+                //         prevJoyX = currJoyX;
+                //         StartCoroutine(ChangeRollNPitch());
+                //     }
 
-            //     if (currJoyY != prevJoyY)
-            //     {
-            //         //Change Pitch
-            //         prevJoyY = currJoyY;
-            //         StartCoroutine(ChangeRollNPitch());
-            //     }
-            // }
+                //     if (currJoyY != prevJoyY)
+                //     {
+                //         //Change Pitch
+                //         prevJoyY = currJoyY;
+                //         StartCoroutine(ChangeRollNPitch());
+                //     }
+                // }
+            }
         }
+
     }
 
     private Vector3 currPos;
