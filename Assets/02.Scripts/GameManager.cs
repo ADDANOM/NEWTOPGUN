@@ -15,15 +15,17 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     float timer;
 
+    // public static GameManager instans = null;  // 싱글턴 타입으로 만든다. 
 
-    public static GameManager instans = null;  // 싱글턴 타입으로 만든다. 
-
-
+    bool startTimer = false;
+    double timerIncrementValue;
+    double startTime;
+    ExitGames.Client.Photon.Hashtable CustomValue;
 
 
     void Awake()
     {
-        instans = this;
+        // instans = this;
         PhotonNetwork.Instantiate("newPlayer", Vector3.zero, Quaternion.identity, 0, null);
 
         spawnMgr = GameObject.Find("SpawnMgr").gameObject;
@@ -37,8 +39,33 @@ public class GameManager : MonoBehaviourPunCallbacks
         boss_Health = BOSS.GetComponent<Boss_Health>();
         timer = 0;
     }
+
+    private void Start()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            CustomValue = new ExitGames.Client.Photon.Hashtable();
+            startTime = PhotonNetwork.Time;
+            startTimer = true;
+            CustomValue.Add("StartTIme", startTime);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(CustomValue);
+        }
+        else
+        {
+            startTime = double.Parse(PhotonNetwork.CurrentRoom.CustomProperties["StartTime"].ToString());
+            startTimer = true;
+        }
+
+    }
+
     void FixedUpdate()
     {
+        if (!startTimer) return;
+
+        timerIncrementValue = PhotonNetwork.Time - startTime;
+
+        Debug.Log(timerIncrementValue);
+
         timer = Time.timeSinceLevelLoad;
 
         if (timer >= 1.0f && timer <= 60.0f)
