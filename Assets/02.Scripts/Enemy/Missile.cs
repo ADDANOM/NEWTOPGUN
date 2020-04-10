@@ -17,6 +17,9 @@ public class Missile : MonoBehaviour
 
     List<GameObject> players = new List<GameObject>();
 
+
+    int ranArray_0;
+
     void Start()
     {
         Destroy(this.gameObject, 10.0f);
@@ -26,11 +29,13 @@ public class Missile : MonoBehaviour
 
         players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         if (players.Count == 1)
-        players.Add(GameObject.FindGameObjectWithTag("Player"));
+            players.Add(GameObject.FindGameObjectWithTag("Player"));
 
 
-        int targetSelect = Random.Range(0, 2);
-        if (targetSelect == 0)
+        ranArray_0 = GameManager.ranArray[3];
+
+        int targetSelect = ranArray_0;
+        if (targetSelect < 5)
         {
             targetTr = players[0].transform;
         }
@@ -52,6 +57,7 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
+
         currDist = Vector3.Distance(targetTr.position, missileTr.position);
 
         if (!isPassed && currDist > minDist)  // 사정거리 밖
