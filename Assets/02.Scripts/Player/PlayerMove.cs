@@ -97,7 +97,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine && !playerHealth.PlayerDeath)
         {
             ctrl();
             updateInput();

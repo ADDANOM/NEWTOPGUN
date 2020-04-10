@@ -44,8 +44,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         hp_5 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_5").gameObject;
 
         myaudio = GetComponent<AudioSource>();
-
-
     }
 
 
@@ -61,7 +59,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
             }
             else
             {
-                curPlayerHealth = 0.0f;
                 Destroyed();
             }
 
@@ -88,9 +85,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         {
             gameOver = true;
         }
-
-
-
     }
 
     private void FixedUpdate()
@@ -216,7 +210,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         curPlayerHealth = 0.0f;
         PlayerDeath = true;
         needRescue.material.color = new Color(1, 0, 0, 1);
-        PlayerMove.enabled = false;
         smoke.Play();
         fireEffect.Stop();
         shotPos.SetActive(false);
@@ -226,7 +219,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         curPlayerHealth = 5.0f;
         PlayerDeath = false;
         needRescue.material.color = new Color(0.5882f, 0.5882f, 0.5882f, 1);
-        PlayerMove.enabled = true;
         smoke.Stop();
         repairParticle.Play();
         shotPos.SetActive(true);
