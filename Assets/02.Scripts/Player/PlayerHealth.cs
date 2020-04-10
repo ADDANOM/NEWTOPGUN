@@ -93,7 +93,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (photonView.IsMine)
         {
@@ -143,6 +143,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         else
         {
             curPlayerHealth = PlayerMove.health_other;
+            PlayerDeath = PlayerMove.death_other;
         }
 
 
