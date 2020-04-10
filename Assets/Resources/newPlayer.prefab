@@ -29113,6 +29113,7 @@ GameObject:
   - component: {fileID: 1459422325910820296}
   - component: {fileID: 7207195374211346358}
   - component: {fileID: 6834538733105621407}
+  - component: {fileID: -5785760018585486922}
   m_Layer: 0
   m_Name: newPlayer
   m_TagString: Player
@@ -29179,6 +29180,10 @@ MonoBehaviour:
   xPort: 0
   wPort: 0
   P_attack: {fileID: 8300000, guid: d1675c28d6f05aa47ab50c7bb538b0c3, type: 3}
+  health_other: 0
+  death_other: 0
+  bombStock_other: 0
+  shotLevel_other: 0
 --- !u!114 &1510965430277013308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29360,6 +29365,18 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-5785760018585486922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7887184949652274552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112925c41286310459ad12c8fae3c13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &99700213602591082
 PrefabInstance:
   m_ObjectHideFlags: 0
