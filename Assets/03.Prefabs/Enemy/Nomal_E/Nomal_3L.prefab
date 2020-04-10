@@ -600,7 +600,19 @@ PrefabInstance:
         type: 3}
       propertyPath: Heal
       value: 
-      objectReference: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a,
+      objectReference: {fileID: 4541245052060599510, guid: 48694c3ec5aff2e42a71a1df81ee629e,
+        type: 3}
+    - target: {fileID: 3192878969393369349, guid: 38708cdd5852bf1439d38593c7010941,
+        type: 3}
+      propertyPath: Boom
+      value: 
+      objectReference: {fileID: 4541245052060599510, guid: 48694c3ec5aff2e42a71a1df81ee629e,
+        type: 3}
+    - target: {fileID: 3192878969393369349, guid: 38708cdd5852bf1439d38593c7010941,
+        type: 3}
+      propertyPath: Missile
+      value: 
+      objectReference: {fileID: 4541245052060599510, guid: 48694c3ec5aff2e42a71a1df81ee629e,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38708cdd5852bf1439d38593c7010941, type: 3}
@@ -804,7 +816,19 @@ PrefabInstance:
         type: 3}
       propertyPath: Heal
       value: 
-      objectReference: {fileID: 4956935788600844604, guid: eec282c7622fc9e4293ae90e1ad9f57a,
+      objectReference: {fileID: 4541245052060599510, guid: 48694c3ec5aff2e42a71a1df81ee629e,
+        type: 3}
+    - target: {fileID: 3192878969393369349, guid: 38708cdd5852bf1439d38593c7010941,
+        type: 3}
+      propertyPath: Boom
+      value: 
+      objectReference: {fileID: 4541245052060599510, guid: 48694c3ec5aff2e42a71a1df81ee629e,
+        type: 3}
+    - target: {fileID: 3192878969393369349, guid: 38708cdd5852bf1439d38593c7010941,
+        type: 3}
+      propertyPath: Missile
+      value: 
+      objectReference: {fileID: 4541245052060599510, guid: 48694c3ec5aff2e42a71a1df81ee629e,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38708cdd5852bf1439d38593c7010941, type: 3}

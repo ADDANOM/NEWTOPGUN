@@ -42,9 +42,7 @@ public class DisItem : MonoBehaviour
 
     void RandomItemSpawn()
     {
-        int rand = ranArray_0;  // 0.0~1.0 이내의 랜덤값을 가져온다.
-
-        if (rand <= 1)  // 10% 확률로 아이템 소환
+        if (ranArray_0 < 5)  // 50% 확률로 아이템 소환
         {
             RandomItemBox();
         }
