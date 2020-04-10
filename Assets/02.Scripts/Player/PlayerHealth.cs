@@ -138,7 +138,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         }
         else
         {
-            curPlayerHealth = PlayerMove.health;
+            curPlayerHealth = PlayerMove.health_other;
         }
 
 

@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     public bool onBomb = false;
     PlayerShot playerShot;
     PlayerHealth playerHealth;
-    public float health;
+    float health;
 
 
     //심포디
@@ -333,7 +333,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     bool onFire_other;
     bool onBomb_other;
-    float health_other;
+    public float health_other;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
