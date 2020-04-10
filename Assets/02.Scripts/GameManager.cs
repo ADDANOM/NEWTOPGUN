@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     Boss_Attack bossAttack;
     Boss_Health boss_Health;
 
-    float timer;
+ //   float timer;
 
     // public static GameManager instans = null;  // 싱글턴 타입으로 만든다. 
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         bossAttack = BOSS.GetComponent<Boss_Attack>();
         boss_Health = BOSS.GetComponent<Boss_Health>();
-        timer = 0;
+        // timer = 0;
     }
 
     private void Start()
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             CustomValue = new ExitGames.Client.Photon.Hashtable();
             startTime = PhotonNetwork.Time;
             startTimer = true;
-            CustomValue.Add("StartTIme", startTime);
+            CustomValue.Add("StartTime", startTime);
             PhotonNetwork.CurrentRoom.SetCustomProperties(CustomValue);
         }
         else
@@ -58,27 +58,25 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!startTimer) return;
 
         timerIncrementValue = PhotonNetwork.Time - startTime;
 
-        Debug.Log(timerIncrementValue);
+       // timer = Time.timeSinceLevelLoad;
 
-        timer = Time.timeSinceLevelLoad;
-
-        if (timer >= 1.0f && timer <= 60.0f)
+        if (timerIncrementValue >= 10.0f && timerIncrementValue <= 60.0f)
         {
             spawnMgr.SetActive(true);
         }
-        else if (timer >= 60.0f && timer <= 65.0f)
+        else if (timerIncrementValue >= 60.0f && timerIncrementValue <= 65.0f)
         {
             spawnMgr.SetActive(false);
             BOSS.SetActive(true);
             boss_tr.Translate(new Vector3(0.0f, 5.0f, 0.0f) * 25 * Time.deltaTime);
         }
-        else if (timer > 65.0f)
+        else if (timerIncrementValue > 65.0f)
             bossPattern();
 
     }
