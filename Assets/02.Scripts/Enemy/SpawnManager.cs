@@ -38,8 +38,6 @@ public class SpawnManager : MonoBehaviour
         Timer += Time.deltaTime;
 
         StartCor();
-
-        Debug.Log($"random = {ran}");
     }
 
     void StartCor()

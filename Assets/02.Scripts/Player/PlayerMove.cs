@@ -190,10 +190,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         moveBehind = SteamVR_Actions._default.GrabGrip.GetState(rightHand);
         moveForward = SteamVR_Actions._default.GrabGrip.GetState(leftHand);
 
-        Debug.Log($"rightHand: {moveBehind}");
-
-        Debug.Log($"leftHand: {moveForward}");
-
         if (moveForward & !moveBehind)
             _go = 1.0f;
         else if (moveBehind & !moveForward)

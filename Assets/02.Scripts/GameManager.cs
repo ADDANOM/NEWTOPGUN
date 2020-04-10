@@ -13,14 +13,18 @@ public class GameManager : MonoBehaviourPunCallbacks
     Boss_Attack bossAttack;
     Boss_Health boss_Health;
 
- //   float timer;
-
     // public static GameManager instans = null;  // 싱글턴 타입으로 만든다. 
 
     bool startTimer = false;
     double timerIncrementValue;
     double startTime;
+    double genTime;
+    int[] ranArray = new int[8];
+    string init_str;
     ExitGames.Client.Photon.Hashtable CustomValue;
+    ExitGames.Client.Photon.Hashtable RandomValue;
+
+
 
 
     void Awake()
@@ -37,7 +41,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         bossAttack = BOSS.GetComponent<Boss_Attack>();
         boss_Health = BOSS.GetComponent<Boss_Health>();
-        // timer = 0;
     }
 
     private void Start()
@@ -63,9 +66,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!startTimer) return;
 
         timerIncrementValue = PhotonNetwork.Time - startTime;
-
-       // timer = Time.timeSinceLevelLoad;
-
         if (timerIncrementValue >= 10.0f && timerIncrementValue <= 60.0f)
         {
             spawnMgr.SetActive(true);
@@ -79,7 +79,48 @@ public class GameManager : MonoBehaviourPunCallbacks
         else if (timerIncrementValue > 65.0f)
             bossPattern();
 
+        if (PhotonNetwork.IsMasterClient)
+        {
+            gen_RanValues();
+            RandomValue = new ExitGames.Client.Photon.Hashtable();
+            RandomValue.Add("Random", init_str);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(RandomValue);
+            set_RanValues();
+        }
+        else
+        {
+            init_str = PhotonNetwork.CurrentRoom.CustomProperties["Random"].ToString();
+            set_RanValues();
+        }
     }
+
+    void gen_RanValues()
+    {
+        if (timerIncrementValue > genTime + 2f)
+        {
+            genTime = timerIncrementValue;
+
+            int init = Random.Range(0, 10000000);
+            init_str = init.ToString();
+        }
+    }
+
+    double _time;
+    void set_RanValues()
+    {
+        for (int i = 0; i < 7; ++i)
+        {
+            ranArray[i] = int.Parse(init_str.Substring(i, 1));
+        }
+
+
+        if (timerIncrementValue > _time + 2f)
+        {
+            _time = timerIncrementValue;
+            Debug.Log(ranArray[0] + ",," + ranArray[6] + ",," + timerIncrementValue);
+        }
+    }
+
 
     void bossPattern()
     {
