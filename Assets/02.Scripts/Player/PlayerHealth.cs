@@ -91,50 +91,57 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-
-        if (prePlayerHealth != curPlayerHealth)
+        if (photonView.IsMine)
         {
-            if (curPlayerHealth > 20.0f)
+            if (prePlayerHealth != curPlayerHealth)
             {
-                HP_5();
-            }
-            else if (curPlayerHealth > 15.0f)
-            {
-                HP_4();
-                // 데미지 입었을때
-                myaudio.clip = P_DamagedSounds;
-                myaudio.Play();
-            }
-            else if (curPlayerHealth > 10.0f)
-            {
-                HP_3();
+                if (curPlayerHealth > 20.0f)
+                {
+                    HP_5();
+                }
+                else if (curPlayerHealth > 15.0f)
+                {
+                    HP_4();
+                    myaudio.clip = P_DamagedSounds;
+                    myaudio.Play();
+                }
+                else if (curPlayerHealth > 10.0f)
+                {
+                    HP_3();
 
-                myaudio.clip = P_DamagedSounds;
-                myaudio.Play();
-            }
-            else if (curPlayerHealth > 5.0f)
-            {
-                HP_2();
+                    myaudio.clip = P_DamagedSounds;
+                    myaudio.Play();
+                }
+                else if (curPlayerHealth > 5.0f)
+                {
+                    HP_2();
 
-                myaudio.clip = P_DamagedSounds;
-                myaudio.Play();
-            }
-            else if (curPlayerHealth > 0.0f)
-            {
-                HP_1();
+                    myaudio.clip = P_DamagedSounds;
+                    myaudio.Play();
+                }
+                else if (curPlayerHealth > 0.0f)
+                {
+                    HP_1();
 
-                myaudio.clip = P_DamagedSounds;
-                myaudio.Play();
-            }
-            else if (curPlayerHealth == 0.0f)
-            {
-                HP_0();
+                    myaudio.clip = P_DamagedSounds;
+                    myaudio.Play();
+                }
+                else if (curPlayerHealth == 0.0f)
+                {
+                    HP_0();
 
-                myaudio.clip = P_DamagedSounds;
-                myaudio.Play();
-            }
+                    myaudio.clip = P_DamagedSounds;
+                    myaudio.Play();
+                }
 
+            }
         }
+        else
+        {
+            curPlayerHealth = PlayerMove.health;
+        }
+
+
 
 
         if (PlayerDeath)

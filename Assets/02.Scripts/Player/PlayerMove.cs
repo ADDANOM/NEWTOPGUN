@@ -43,6 +43,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     public bool onFire = false;
     public bool onBomb = false;
     PlayerShot playerShot;
+    PlayerHealth playerHealth;
+    public float health;
 
 
     //심포디
@@ -77,6 +79,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         check_tr_2 = check_ctrl_right.GetComponent<Transform>();
 
         playerShot = GetComponent<PlayerShot>();
+        playerHealth = GetComponent<PlayerHealth>();
 
         // xPort = Sym.Sym4D_X_Find();
         // wPort = Sym.Sym4D_W_Find();
@@ -141,6 +144,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     {
         onFire = SteamVR_Actions._default.InteractUI.GetState(leftHand);
         onBomb = SteamVR_Actions._default.InteractUI.GetState(rightHand);
+        health = playerHealth.curPlayerHealth;
+                
 
         if (onFire)
         {
@@ -328,6 +333,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     bool onFire_other;
     bool onBomb_other;
+    float health_other;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -337,6 +343,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(tr.rotation);
             stream.SendNext(onFire);
             stream.SendNext(onBomb);
+            stream.SendNext(health);
         }
         else
         {
@@ -344,6 +351,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             currRot = (Quaternion)stream.ReceiveNext();
             onFire_other = (bool)stream.ReceiveNext();
             onBomb_other = (bool)stream.ReceiveNext();
+            health_other = (float)stream.ReceiveNext();
         }
 
     }
