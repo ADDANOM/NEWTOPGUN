@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     double timerIncrementValue;
     double startTime;
     double genTime;
-    int[] ranArray = new int[8];
+    public static int[] ranArray = new int[8];
     string init_str;
     ExitGames.Client.Photon.Hashtable CustomValue;
     ExitGames.Client.Photon.Hashtable RandomValue;
@@ -96,19 +96,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void gen_RanValues()
     {
-        if (timerIncrementValue > genTime + 2f)
+        if (timerIncrementValue > genTime + 0.5f)
         {
             genTime = timerIncrementValue;
 
-            int init = Random.Range(0, 10000000);
-            init_str = init.ToString();
+            int init = Random.Range(0, 100000000);
+            init_str = init.ToString("D8");
         }
     }
 
     double _time;
-    void set_RanValues()
+    public void set_RanValues()
     {
-        for (int i = 0; i < 7; ++i)
+        for (int i = 0; i < 8; i++)
         {
             ranArray[i] = int.Parse(init_str.Substring(i, 1));
         }
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (timerIncrementValue > _time + 2f)
         {
             _time = timerIncrementValue;
-            Debug.Log(ranArray[0] + ",," + ranArray[6] + ",," + timerIncrementValue);
+            // Debug.Log(ranArray[0] + ",," + ranArray[6] + ",," + timerIncrementValue);
         }
     }
 
