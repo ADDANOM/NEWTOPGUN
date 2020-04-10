@@ -26,6 +26,8 @@ public class PlayerShot : MonoBehaviourPunCallbacks
     private AudioSource ShotBoom;
     public AudioClip P_ShotSounds;
 
+    PlayerMove playerMove;
+
     private void Awake()
     {
         shotLevel = 1;
@@ -47,34 +49,65 @@ public class PlayerShot : MonoBehaviourPunCallbacks
         bomb_4 = transform.Find("FighterInterceptor").transform.Find("BombPos").transform.Find("BOMB_missile_4").gameObject;
 
         ShotBoom = GetComponent<AudioSource>();
+        playerMove = GetComponent<PlayerMove>();
     }
 
     private void Update()
     {
-        
-        if (preBombStock != bombStock)
+        if (photonView.IsMine)
         {
-            if (bombStock > 3)
+            if (preBombStock != bombStock)
             {
-                BOMB_4();
-            }
-            else if (bombStock > 2)
-            {
-                BOMB_3();
-            }
-            else if (bombStock > 1)
-            {
-                BOMB_2();
-            }
-            else if (bombStock > 0)
-            {
-                BOMB_1();
-            }
-            else
-            {
-                BOMB_0();
+                if (bombStock > 3)
+                {
+                    BOMB_4();
+                }
+                else if (bombStock > 2)
+                {
+                    BOMB_3();
+                }
+                else if (bombStock > 1)
+                {
+                    BOMB_2();
+                }
+                else if (bombStock > 0)
+                {
+                    BOMB_1();
+                }
+                else
+                {
+                    BOMB_0();
+                }
             }
         }
+        else
+        {
+            bombStock = playerMove.bombStock_other;
+            if (preBombStock != bombStock)
+            {
+                if (bombStock > 3)
+                {
+                    BOMB_4();
+                }
+                else if (bombStock > 2)
+                {
+                    BOMB_3();
+                }
+                else if (bombStock > 1)
+                {
+                    BOMB_2();
+                }
+                else if (bombStock > 0)
+                {
+                    BOMB_1();
+                }
+                else
+                {
+                    BOMB_0();
+                }
+            }
+        }
+
         preBombStock = bombStock;
     }
 
@@ -129,7 +162,7 @@ public class PlayerShot : MonoBehaviourPunCallbacks
             GameManager.player_bomb();
             nextBomb = Time.time + bombRate;
             boss_health.curBossHealth -= 500.0f;
-            
+
         }
 
     }

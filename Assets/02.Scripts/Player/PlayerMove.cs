@@ -46,6 +46,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     PlayerHealth playerHealth;
     float health;
     bool death;
+    int bombStock;
+
 
 
     //심포디
@@ -147,6 +149,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         onBomb = SteamVR_Actions._default.InteractUI.GetState(rightHand);
         health = playerHealth.curPlayerHealth;
         death = playerHealth.PlayerDeath;
+        bombStock = playerShot.bombStock;
 
         if (!playerHealth.PlayerDeath)
         {
@@ -350,6 +353,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     bool onBomb_other;
     public float health_other;
     public bool death_other;
+    public int bombStock_other;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -361,6 +365,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(onBomb);
             stream.SendNext(health);
             stream.SendNext(death);
+            stream.SendNext(bombStock);
         }
         else
         {
@@ -370,6 +375,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             onBomb_other = (bool)stream.ReceiveNext();
             health_other = (float)stream.ReceiveNext();
             death_other = (bool)stream.ReceiveNext();
+            bombStock_other = (int)stream.ReceiveNext();
         }
 
     }
