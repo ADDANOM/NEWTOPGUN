@@ -31,6 +31,13 @@ public class Boss_Attack : MonoBehaviour
 
     List<GameObject> boss_targets = new List<GameObject>();
 
+    int ranArray_0;
+    int ranArray_1;
+    int ranArray_2;
+    int ranArray_3;
+    int ranArray_4;
+    int ranArray_5;
+    int ranArray_6;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +45,7 @@ public class Boss_Attack : MonoBehaviour
         boss_targets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         if (boss_targets.Count == 1)
             boss_targets.Add(GameObject.FindGameObjectWithTag("Player"));
-        
+
         anim = GetComponent<Animator>();
         boss_Health = GetComponent<Boss_Health>();
 
@@ -62,15 +69,21 @@ public class Boss_Attack : MonoBehaviour
     private void FixedUpdate()
     {
 
+        ranArray_0 = GameManager.ranArray[0];
+        ranArray_1 = GameManager.ranArray[1];
+        ranArray_2 = GameManager.ranArray[2];
+        ranArray_3 = GameManager.ranArray[3];
+        ranArray_4 = GameManager.ranArray[4];
+        ranArray_5 = GameManager.ranArray[5];
+        ranArray_6 = GameManager.ranArray[6];
 
-        if (Time.time > selectTime + 5.0f)
+        if (Time.time > selectTime + 3.0f)
         {
             selectTime = Time.time;
-            targetSelect = Random.Range(0, 2);
+            targetSelect = ranArray_0;
 
-            if (targetSelect == 0)
+            if (targetSelect < 5)
             {
-                Debug.Log("1 select");
                 if (!boss_targets[0].GetComponent<PlayerHealth>().PlayerDeath)
                     player_tr_1 = boss_targets[0].transform;
                 else
@@ -78,7 +91,6 @@ public class Boss_Attack : MonoBehaviour
             }
             else
             {
-                Debug.Log("2 select");
                 if (!boss_targets[1].GetComponent<PlayerHealth>().PlayerDeath)
                     player_tr_1 = boss_targets[1].transform;
                 else
@@ -305,9 +317,9 @@ public class Boss_Attack : MonoBehaviour
     }
     IEnumerator attack_left()
     {
-        int rd1 = Random.Range(0, 50);
-        int rd2 = Random.Range(0, 50);
-        int rd3 = Random.Range(0, 50);
+        int rd1 = ranArray_1 + ranArray_2*10;
+        int rd2 = ranArray_3 + ranArray_4*10;
+        int rd3 = ranArray_5 + ranArray_6*10;
 
         GameObject _bullet_1 = Instantiate(bullet_sphere, boss_attack_left_center_1.position, Quaternion.identity) as GameObject;
         _bullet_1.GetComponent<Transform>().localScale = new Vector3(50f, 50f, 50f);
@@ -334,9 +346,9 @@ public class Boss_Attack : MonoBehaviour
 
     IEnumerator attack_right()
     {
-        int rd1 = Random.Range(0, 50);
-        int rd2 = Random.Range(0, 50);
-        int rd3 = Random.Range(0, 50);
+        int rd1 = ranArray_1 + ranArray_2*10;
+        int rd2 = ranArray_3 + ranArray_4*10;
+        int rd3 = ranArray_5 + ranArray_6*10;
 
         GameObject _bullet_1 = Instantiate(bullet_sphere, boss_attack_right_center_1.position, Quaternion.identity) as GameObject;
         _bullet_1.GetComponent<Transform>().localScale = new Vector3(10f, 10f, 10f);

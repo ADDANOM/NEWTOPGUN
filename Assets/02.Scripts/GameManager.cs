@@ -70,13 +70,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             spawnMgr.SetActive(true);
         }
-        else if (timerIncrementValue >= 60.0f && timerIncrementValue <= 65.0f)
+        else if (timerIncrementValue >= 10.0f && timerIncrementValue <= 15.0f)
         {
             spawnMgr.SetActive(false);
             BOSS.SetActive(true);
             boss_tr.Translate(new Vector3(0.0f, 5.0f, 0.0f) * 25 * Time.deltaTime);
         }
-        else if (timerIncrementValue > 65.0f)
+        else if (timerIncrementValue > 15.0f)
             bossPattern();
 
         if (PhotonNetwork.IsMasterClient)
