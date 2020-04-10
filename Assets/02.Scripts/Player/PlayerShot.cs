@@ -15,6 +15,7 @@ public class PlayerShot : MonoBehaviourPunCallbacks
 
     GameObject shotPos;
     public int shotLevel;
+    int preShotLevel;
     public int bombStock;
     int preBombStock;
     private ParticleSystem Bomb;
@@ -79,10 +80,26 @@ public class PlayerShot : MonoBehaviourPunCallbacks
                     BOMB_0();
                 }
             }
+
+            if (preShotLevel != shotLevel)
+            {
+                if (shotLevel == 2)
+                {
+                    shotLevel_2();
+                }
+                else if (shotLevel == 3)
+                {
+                    shotLevel_3();
+                }
+            }
+
+
         }
         else
         {
             bombStock = playerMove.bombStock_other;
+            shotLevel = playerMove.shotLevel_other;
+
             if (preBombStock != bombStock)
             {
                 if (bombStock > 3)
@@ -106,8 +123,21 @@ public class PlayerShot : MonoBehaviourPunCallbacks
                     BOMB_0();
                 }
             }
-        }
 
+            if (preShotLevel != shotLevel)
+            {
+                if (shotLevel == 2)
+                {
+                    shotLevel_2();
+                }
+                else if (shotLevel == 3)
+                {
+                    shotLevel_3();
+                }
+            }
+
+        }
+        preShotLevel = shotLevel;
         preBombStock = bombStock;
     }
 
@@ -167,14 +197,6 @@ public class PlayerShot : MonoBehaviourPunCallbacks
 
     }
 
-    public void shotLevel_1()
-    {
-        mainshotPos.GetComponent<PlayerFire>().enabled = true;
-        subshotPos_a.GetComponent<PlayerSubFire>().enabled = false;
-        subshotPos_b.GetComponent<PlayerSubFire>().enabled = false;
-        subshotPos_a_2.GetComponent<PlayerSubFire>().enabled = false;
-        subshotPos_b_2.GetComponent<PlayerSubFire>().enabled = false;
-    }
     public void shotLevel_2()
     {
         mainshotPos.GetComponent<PlayerFire>().enabled = true;

@@ -47,6 +47,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     float health;
     bool death;
     int bombStock;
+    int shotLevel;
 
 
 
@@ -150,6 +151,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         health = playerHealth.curPlayerHealth;
         death = playerHealth.PlayerDeath;
         bombStock = playerShot.bombStock;
+        shotLevel = playerShot.shotLevel;
 
         if (!playerHealth.PlayerDeath)
         {
@@ -354,6 +356,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     public float health_other;
     public bool death_other;
     public int bombStock_other;
+    public int shotLevel_other;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -366,6 +369,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(health);
             stream.SendNext(death);
             stream.SendNext(bombStock);
+            stream.SendNext(shotLevel);
         }
         else
         {
@@ -376,6 +380,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             health_other = (float)stream.ReceiveNext();
             death_other = (bool)stream.ReceiveNext();
             bombStock_other = (int)stream.ReceiveNext();
+            shotLevel_other = (int)stream.ReceiveNext();
         }
 
     }

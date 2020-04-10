@@ -20,12 +20,10 @@ public class PlayerGetitem : MonoBehaviour
         {
             if (playerShot.shotLevel == 1 && playerHealth.curPlayerHealth > 0)
             {
-                playerShot.shotLevel_2();
                 playerShot.shotLevel = 2;
             }
             else if (playerShot.shotLevel == 2 && playerHealth.curPlayerHealth > 0)
             {
-                playerShot.shotLevel_3();
                 playerShot.shotLevel = 3;
             }
 
