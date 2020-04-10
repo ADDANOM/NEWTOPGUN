@@ -60,7 +60,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
                 curPlayerHealth -= 1.0f;
             }
             else
+            {
+                curPlayerHealth = 0.0f;
                 Destroyed();
+            }
+
         }
 
         if (other.gameObject.name is "RepairZone" && PlayerDeath)
