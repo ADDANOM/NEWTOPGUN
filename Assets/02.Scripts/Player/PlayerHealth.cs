@@ -21,9 +21,14 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     Transform tr;
     GameObject shotPos;
     GameObject hp_1, hp_2, hp_3, hp_4, hp_5;
+    GameObject hpBar;
+    GameObject laser;
 
     private AudioSource myaudio;
     public AudioClip P_DamagedSounds;
+
+    public Image damageImage;
+    public Color flashCol = new Color(1f, 0f, 0f, 0.4f);
 
     private void Start()
     {
@@ -43,7 +48,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         hp_4 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_4").gameObject;
         hp_5 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_5").gameObject;
 
+        hpBar = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").gameObject;
+        laser = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("[CameraRig]").gameObject;
+
         myaudio = GetComponent<AudioSource>();
+        damageImage.color = flashCol;
     }
 
 
@@ -163,6 +172,8 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     void HP_4()
     {
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+
         hp_1.SetActive(true);
         hp_2.SetActive(true);
         hp_3.SetActive(true);
@@ -172,6 +183,8 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     void HP_3()
     {
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+
         hp_1.SetActive(true);
         hp_2.SetActive(true);
         hp_3.SetActive(true);
@@ -180,6 +193,8 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     }
     void HP_2()
     {
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+
         hp_1.SetActive(true);
         hp_2.SetActive(true);
         hp_3.SetActive(false);
@@ -188,6 +203,8 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     }
     void HP_1()
     {
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+
         hp_1.SetActive(true);
         hp_2.SetActive(false);
         hp_3.SetActive(false);
@@ -197,6 +214,8 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     void HP_0()
     {
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+
         hp_1.SetActive(false);
         hp_2.SetActive(false);
         hp_3.SetActive(false);
@@ -222,6 +241,12 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         smoke.Stop();
         repairParticle.Play();
         shotPos.SetActive(true);
+    }
+
+    void GameOver()
+    {
+        hpBar.SetActive(false);
+        laser.SetActive(true);
     }
 
 }

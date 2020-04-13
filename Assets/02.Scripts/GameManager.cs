@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     Boss_Attack bossAttack;
     Boss_Health boss_Health;
+
 
     // public static GameManager instans = null;  // 싱글턴 타입으로 만든다. 
 
@@ -163,5 +165,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         onBulletClear();
     }
 
+    public void OnExiting()
+    {
+        Debug.Log("bye");
+        SceneManager.LoadScene(0);
+    }
 
+    public void OnRestarting()
+    {
+        Debug.Log("SeeyouLater~");
+        SceneManager.LoadScene(1);
+    }
 }
