@@ -27,8 +27,9 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     private AudioSource myaudio;
     public AudioClip P_DamagedSounds;
 
-    public Image damageImage;
     public Color flashCol = new Color(1f, 0f, 0f, 0.4f);
+    GameObject damageImage;
+    bool damaged = true;
 
     private void Start()
     {
@@ -48,11 +49,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         hp_4 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_4").gameObject;
         hp_5 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_5").gameObject;
 
+        damageImage = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("Damaged").gameObject;
         hpBar = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").gameObject;
         laser = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("[CameraRig]").gameObject;
 
         myaudio = GetComponent<AudioSource>();
-        damageImage.color = flashCol;
     }
 
 
@@ -93,6 +94,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         if (other.gameObject.name is "Zone_South" && PlayerDeath)
         {
             gameOver = true;
+            
         }
     }
 
@@ -111,13 +113,22 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
                     HP_4();
                     myaudio.clip = P_DamagedSounds;
                     myaudio.Play();
+
+                    if (damaged)
+                    {
+                        StartCoroutine("Damaging");
+                    }
                 }
                 else if (curPlayerHealth > 10.0f)
                 {
                     HP_3();
-
                     myaudio.clip = P_DamagedSounds;
                     myaudio.Play();
+
+                    if(damaged)
+                    {
+                        StartCoroutine("Damaging");
+                    }
                 }
                 else if (curPlayerHealth > 5.0f)
                 {
@@ -125,6 +136,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
                     myaudio.clip = P_DamagedSounds;
                     myaudio.Play();
+
+                    if (damaged)
+                    {
+                        StartCoroutine("Damaging");
+                    }
                 }
                 else if (curPlayerHealth > 0.0f)
                 {
@@ -132,6 +148,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
                     myaudio.clip = P_DamagedSounds;
                     myaudio.Play();
+
+                    if (damaged)
+                    {
+                        StartCoroutine("Damaging");
+                    }
                 }
                 else if (curPlayerHealth == 0.0f)
                 {
@@ -139,6 +160,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
                     myaudio.clip = P_DamagedSounds;
                     myaudio.Play();
+
+                    if (damaged)
+                    {
+                        StartCoroutine("Damaging");
+                    }
                 }
 
             }
@@ -147,6 +173,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         {
             curPlayerHealth = PlayerMove.health_other;
             PlayerDeath = PlayerMove.death_other;
+
         }
 
 
@@ -172,8 +199,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     void HP_4()
     {
-        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
-
         hp_1.SetActive(true);
         hp_2.SetActive(true);
         hp_3.SetActive(true);
@@ -183,17 +208,19 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     void HP_3()
     {
-        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+        damaged = true;
 
         hp_1.SetActive(true);
         hp_2.SetActive(true);
         hp_3.SetActive(true);
         hp_4.SetActive(false);
         hp_5.SetActive(false);
+
     }
+
     void HP_2()
     {
-        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+        damaged = true;
 
         hp_1.SetActive(true);
         hp_2.SetActive(true);
@@ -203,7 +230,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     }
     void HP_1()
     {
-        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+        StartCoroutine(("Damaging"));
 
         hp_1.SetActive(true);
         hp_2.SetActive(false);
@@ -214,7 +241,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     void HP_0()
     {
-        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
+        StartCoroutine(("Damaging"));
 
         hp_1.SetActive(false);
         hp_2.SetActive(false);
@@ -247,6 +274,15 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     {
         hpBar.SetActive(false);
         laser.SetActive(true);
+    }
+
+    IEnumerator Damaging()
+    {
+        damageImage.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        damageImage.SetActive(false);
+        Debug.Log("333");
+        damaged = false;
     }
 
 }
