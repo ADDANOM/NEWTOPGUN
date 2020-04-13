@@ -167,10 +167,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OnExiting()
     {
-            Debug.Log("exit1");
+            // Debug.Log("exit1");
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("exit2");
+            // Debug.Log("exit2");
             PhotonNetwork.LoadLevel(0);
         }
     }
@@ -178,10 +178,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void OnRestarting()
     {
         
-            Debug.Log("restarting1");
+            // Debug.Log("restarting1");
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("restarting2");
+            // Debug.Log("restarting2");
             PhotonNetwork.LoadLevel(1);
         }
     }

@@ -103,28 +103,29 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
         if (photonView.IsMine)
         {
-            if (PlayerDeath)
+            if (PlayerDeath && PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
-                if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-                {
-                    gameoverPanel.SetActive(true);
-                    GameOver();
-                    PlayerMove.enabled = false;
-                }
-                else
-                {
-                    if (PlayerMove.death_other)
-                    {
-                        gameoverPanel.SetActive(true);
-                        GameOver();
-                        PlayerMove.enabled = false;
-                    }
-                }
+                gameoverPanel.SetActive(true);
+                GameOver();
+                PlayerMove.enabled = false;
             }
             else
                 gameoverPanel.SetActive(false);
+
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PlayerDeath && PlayerMove.death_other)
+            {
+                Debug.Log("ddddd");
+                gameoverPanel.SetActive(true);
+                GameOver();
+                PlayerMove.enabled = false;
+
+            }
+            else
+                gameoverPanel.SetActive(false);
+
 
 
 
