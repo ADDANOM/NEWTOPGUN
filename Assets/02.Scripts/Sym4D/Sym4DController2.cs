@@ -140,12 +140,8 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
         }
         else if (Controller_Tr.eulerAngles.z > 295) // down
         {
-            if (Controller_Tr.eulerAngles.z < 270) // up
-            {
-                prevJoyY = currJoyY;
-                StartCoroutine(ChangeRollNPitch());
-            }
-
+            prevJoyY = currJoyY;
+            StartCoroutine(ChangeRollNPitch());
         }
         else
         {
@@ -167,7 +163,7 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
         Sym.Sym4D_X_StartContents(xPort);
         yield return new WaitForSeconds(0.1f);
 
-        Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 50), (int)(-currJoyY * 50));
+        Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 50), (int)(-currJoyY * 25));
         Debug.Log((int)(-currJoyX * 100) + " and " + (int)(-currJoyY * 100));
 
         yield return new WaitForSeconds(0.1f);
