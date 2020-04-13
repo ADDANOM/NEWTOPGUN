@@ -86,25 +86,23 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
     float currJoyX, currJoyY;
     bool isFinished = false;
 
-    float v, h;
     PlayerMove playerMove;
 
     private void Start()
     {
         playerMove = transform.parent.GetComponent<PlayerMove>();
-        v = playerMove.v;
-        h = playerMove.h;
     }
 
     void Update()
     {
         if (!photonView.IsMine)
             return;
-            
-        currJoyX = v;
-        currJoyY = h;
+
+        currJoyX = playerMove.v;
+        currJoyY = playerMove.h; 
         if (currJoyX != prevJoyX && PlayerMove.check_ctrl)
         {
+            //Debug.Log($"x : {currJoyX}");
             //Change Roll
             prevJoyX = currJoyX;
             StartCoroutine(ChangeRollNPitch());
@@ -112,6 +110,7 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
 
         if (currJoyY != prevJoyY && PlayerMove.check_ctrl)
         {
+           // Debug.Log($"y : {currJoyY}");
             //Change Pitch
             prevJoyY = currJoyY;
             StartCoroutine(ChangeRollNPitch());
@@ -128,8 +127,8 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
         Sym.Sym4D_X_StartContents(xPort);
         yield return new WaitForSeconds(0.1f);
 
-        Sym.Sym4D_X_SendMosionData((int)-currJoyX * 100, (int)currJoyY * 100);
-
+        Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 100), (int)(currJoyY * 100));
+        Debug.Log((int)(-currJoyX * 100) +" and " +(int)(currJoyY * 100));
 
         yield return new WaitForSeconds(0.1f);
     }
