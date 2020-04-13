@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     private ParticleSystem Booster_1;
     private ParticleSystem Booster_2;
     private ParticleSystem Shot;
+    private ParticleSystem Speed_Particle;
 
 
 
@@ -74,6 +75,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
         Booster_1 = transform.Find("FighterInterceptor").transform.Find("Booster_1").GetComponent<ParticleSystem>();
         Booster_2 = transform.Find("FighterInterceptor").transform.Find("Booster_2").GetComponent<ParticleSystem>();
+        Speed_Particle = transform.Find("BoosterParticle").GetComponent<ParticleSystem>();
 
         Shot = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
         Controller_Tr = transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
@@ -223,16 +225,19 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             {
                 main1.startColor = new Color(1.0f, 0.51f, 0.31f, 0.0f);
                 main2.startColor = new Color(1.0f, 0.51f, 0.31f, 0.0f);
+                Speed_Particle.Stop();
             }
             else if (forwardSpeed == 0)
             {
                 main1.startColor = new Color(1.0f, 0.51f, 0.31f, 0.5f);
                 main2.startColor = new Color(1.0f, 0.51f, 0.31f, 0.5f);
+                Speed_Particle.Stop();
             }
             else
             {
                 main1.startColor = new Color(0.04f, 0.26f, 1.00f, 0.5f);
                 main2.startColor = new Color(0.04f, 0.26f, 1.00f, 0.5f);
+                Speed_Particle.Play();
             }
 
             if (Controller_Tr.eulerAngles.x >= 300 && Controller_Tr.eulerAngles.x <= 350 && Controller_Tr.eulerAngles.y < 105) // left
