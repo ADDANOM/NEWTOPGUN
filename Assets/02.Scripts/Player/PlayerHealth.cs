@@ -105,13 +105,26 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            if (PlayerDeath && PlayerMove.death_other)
+            if (PlayerDeath)
             {
-                gameoverPanel.SetActive(true);
-                GameOver();
+                if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+                {
+                    gameoverPanel.SetActive(true);
+                    GameOver();
+                }
+                else
+                {
+                    if (PlayerMove.death_other)
+                    {
+                        gameoverPanel.SetActive(true);
+                        GameOver();
+                    }
+                }
             }
             else
                 gameoverPanel.SetActive(false);
+
+                
 
             if (prePlayerHealth != curPlayerHealth)
             {
