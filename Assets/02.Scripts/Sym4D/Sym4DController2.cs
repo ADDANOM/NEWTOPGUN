@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sym = Sym4D.Sym4DEmulator;
+using Photon.Pun;
 
-public class Sym4DController2 : MonoBehaviour
+public class Sym4DController2 : MonoBehaviourPunCallbacks
 {
     public int xPort; //좌석장비의 통신 포트
     public int wPort; //바람장비의 통신 포트
@@ -90,12 +91,16 @@ public class Sym4DController2 : MonoBehaviour
 
     private void Start()
     {
+        playerMove = transform.parent.GetComponent<PlayerMove>();
         v = playerMove.v;
         h = playerMove.h;
     }
 
     void Update()
     {
+        if (!photonView.IsMine)
+            return;
+            
         currJoyX = v;
         currJoyY = h;
         if (currJoyX != prevJoyX && PlayerMove.check_ctrl)
@@ -111,6 +116,8 @@ public class Sym4DController2 : MonoBehaviour
             prevJoyY = currJoyY;
             StartCoroutine(ChangeRollNPitch());
         }
+
+
     }
 
     IEnumerator ChangeRollNPitch()
