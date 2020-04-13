@@ -59,6 +59,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log($"Join Failure {returnCode} / {message}");
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        PhotonNetwork.ConnectUsingSettings();
+
+    }
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room !!!");

@@ -176,11 +176,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        PhotonNetwork.ConnectUsingSettings();
-
-    }
 
     public void OnRestarting()
     {
