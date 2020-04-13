@@ -591,6 +591,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2550649873234115344, guid: 38708cdd5852bf1439d38593c7010941,
+        type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3192878969393369349, guid: 38708cdd5852bf1439d38593c7010941,
         type: 3}
       propertyPath: ExploClip
@@ -705,6 +710,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2550649873234115344, guid: 38708cdd5852bf1439d38593c7010941,
+        type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3192878969393369349, guid: 38708cdd5852bf1439d38593c7010941,
         type: 3}
       propertyPath: ExploClip
@@ -806,6 +816,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550649873234115344, guid: 38708cdd5852bf1439d38593c7010941,
+        type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3192878969393369349, guid: 38708cdd5852bf1439d38593c7010941,
         type: 3}

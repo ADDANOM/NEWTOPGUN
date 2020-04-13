@@ -8,7 +8,7 @@ public class EnemyControll : MonoBehaviour
 
     public float moveSpeed = 10.0f;  // EnenmyMove 속도값.
 
-    public float EnemycurHealth = 10.0f;
+    public float EnemycurHealth = 1.0f;
     public bool isAlive = true;
 
     private AudioSource E_audio;

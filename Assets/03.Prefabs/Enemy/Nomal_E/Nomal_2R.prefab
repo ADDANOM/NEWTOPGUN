@@ -474,6 +474,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8849439170149128639}
     m_Modifications:
+    - target: {fileID: -3643388186882335175, guid: ca5c50d290171cd4aa676fe81a0fe04a,
+        type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3963276880469977656, guid: ca5c50d290171cd4aa676fe81a0fe04a,
         type: 3}
       propertyPath: m_Enabled
@@ -576,6 +581,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8849439170149128639}
     m_Modifications:
+    - target: {fileID: -3643388186882335175, guid: ca5c50d290171cd4aa676fe81a0fe04a,
+        type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3963276880469977656, guid: ca5c50d290171cd4aa676fe81a0fe04a,
         type: 3}
       propertyPath: m_Enabled
@@ -690,6 +700,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8849439170149128639}
     m_Modifications:
+    - target: {fileID: -3643388186882335175, guid: ca5c50d290171cd4aa676fe81a0fe04a,
+        type: 3}
+      propertyPath: EnemycurHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3963276880469977656, guid: ca5c50d290171cd4aa676fe81a0fe04a,
         type: 3}
       propertyPath: m_Enabled
