@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     public Color flashCol = new Color(1f, 0f, 0f, 0.4f);
     GameObject damageImage;
     bool damaged = true;
+    public GameObject gameoverPanel;
 
     private void Start()
     {
@@ -42,6 +43,9 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         repairParticle = transform.Find("RepairParticle").GetComponent<ParticleSystem>();
         fireEffect = transform.Find("FighterInterceptor").transform.Find("Fire_Effect").GetComponent<ParticleSystem>();
         shotPos = transform.Find("ShotPos").gameObject;
+
+        gameoverPanel = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas").transform.Find("GameOver").gameObject;
+
 
         hp_1 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_1").gameObject;
         hp_2 = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("Canvas_UI").transform.Find("HP_Panel").transform.Find("HP_2").gameObject;
@@ -94,7 +98,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         if (other.gameObject.name is "Zone_South" && PlayerDeath)
         {
             gameOver = true;
-            
         }
     }
 
@@ -102,6 +105,14 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
+            if (PlayerDeath && PlayerMove.death_other)
+            {
+                gameoverPanel.SetActive(true);
+                GameOver();
+            }
+            else
+                gameoverPanel.SetActive(false);
+
             if (prePlayerHealth != curPlayerHealth)
             {
                 if (curPlayerHealth > 20.0f)
@@ -125,7 +136,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
                     myaudio.clip = P_DamagedSounds;
                     myaudio.Play();
 
-                    if(damaged)
+                    if (damaged)
                     {
                         StartCoroutine("Damaging");
                     }
@@ -173,7 +184,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         {
             curPlayerHealth = PlayerMove.health_other;
             PlayerDeath = PlayerMove.death_other;
-
         }
 
 

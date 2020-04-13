@@ -43,7 +43,7 @@ public class DisItem : MonoBehaviourPunCallbacks
 
     void RandomItemSpawn()
     {
-        if (random <= 3)  // 30% 확률로 아이템 소환
+        if (random <= 2)  // 30% 확률로 아이템 소환
         {
             RandomItemBox();
         }
@@ -52,12 +52,12 @@ public class DisItem : MonoBehaviourPunCallbacks
 
     void RandomItemBox()
     {
-        if (random2 <= 2)  // 20% Boom 아이템 소환
+        if (random2 <= 3)  // 30% Boom 아이템 소환
         {
             GameObject BoomBox = PhotonNetwork.InstantiateSceneObject("BoomBox", pos, tr.rotation) as GameObject;
 
         }
-        else if (random2 <= 6)  //  40% 확률로 힐 소환
+        else if (random2 <= 7)  //  40% 확률로 힐 소환
         {
             GameObject HealBox = PhotonNetwork.InstantiateSceneObject("HealBox", pos, tr.rotation) as GameObject;
 

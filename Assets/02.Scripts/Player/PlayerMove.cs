@@ -47,6 +47,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     PlayerHealth playerHealth;
     float health;
     bool death;
+    bool gameover;
     int bombStock;
     int shotLevel;
 
@@ -152,6 +153,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         onBomb = SteamVR_Actions._default.InteractUI.GetState(rightHand);
         health = playerHealth.curPlayerHealth;
         death = playerHealth.PlayerDeath;
+        gameover = playerHealth.gameOver;
         bombStock = playerShot.bombStock;
         shotLevel = playerShot.shotLevel;
 
@@ -352,6 +354,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     bool onBomb_other;
     public float health_other;
     public bool death_other;
+    public bool gameover_other;
     public int bombStock_other;
     public int shotLevel_other;
 
@@ -367,6 +370,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(death);
             stream.SendNext(bombStock);
             stream.SendNext(shotLevel);
+            stream.SendNext(gameover);
         }
         else
         {
@@ -378,6 +382,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             death_other = (bool)stream.ReceiveNext();
             bombStock_other = (int)stream.ReceiveNext();
             shotLevel_other = (int)stream.ReceiveNext();
+            gameover_other = (bool)stream.ReceiveNext();
         }
 
     }
