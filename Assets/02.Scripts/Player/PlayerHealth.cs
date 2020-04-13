@@ -103,7 +103,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
         if (photonView.IsMine)
         {
             if (PlayerDeath && PhotonNetwork.CurrentRoom.PlayerCount == 1)
@@ -112,20 +111,27 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
                 GameOver();
                 PlayerMove.enabled = false;
             }
-            else
-                gameoverPanel.SetActive(false);
-
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PlayerDeath && PlayerMove.death_other)
+            else if (!PlayerDeath && PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
-                Debug.Log("ddddd");
+                gameoverPanel.SetActive(false);
+                hpBar.SetActive(true);
+                laser.SetActive(false);
+                PlayerMove.enabled = true;
+            }
+
+            if (curPlayerHealth <= 0 && PlayerMove.health_other <= 0 && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
                 gameoverPanel.SetActive(true);
                 GameOver();
                 PlayerMove.enabled = false;
-
             }
-            else
+            else if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
                 gameoverPanel.SetActive(false);
-
+                hpBar.SetActive(true);
+                laser.SetActive(false);
+                PlayerMove.enabled = true;
+            }
 
 
 

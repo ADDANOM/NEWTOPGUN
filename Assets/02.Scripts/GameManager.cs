@@ -167,18 +167,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OnExiting()
     {
-            // Debug.Log("exit1");
+        // Debug.Log("exit1");
         if (PhotonNetwork.IsMasterClient)
         {
             // Debug.Log("exit2");
             PhotonNetwork.LoadLevel(0);
         }
+        PhotonNetwork.LeaveRoom();
     }
 
     public void OnRestarting()
     {
-        
-            // Debug.Log("restarting1");
+
+        // Debug.Log("restarting1");
         if (PhotonNetwork.IsMasterClient)
         {
             // Debug.Log("restarting2");
