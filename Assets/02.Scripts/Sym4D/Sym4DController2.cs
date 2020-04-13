@@ -9,6 +9,7 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
     public int xPort; //좌석장비의 통신 포트
     public int wPort; //바람장비의 통신 포트
 
+
     private WaitForSeconds ws = new WaitForSeconds(1.5f);
 
     public void OnInit()
@@ -37,49 +38,49 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
         Sym.Sym4D_X_SetConfig(100, 100);
         yield return ws;
 
-        //Sym4D-X100에 모션 데이터 전달(-100 ~ +100)
-        Sym.Sym4D_X_SendMosionData(0, 0);
-        yield return ws;
+        // //Sym4D-X100에 모션 데이터 전달(-100 ~ +100)
+        // Sym.Sym4D_X_SendMosionData(0, 0);
+        // yield return ws;
 
-        Sym.Sym4D_X_SendMosionData(100, 100);
-        yield return ws;
+        // Sym.Sym4D_X_SendMosionData(100, 100);
+        // yield return ws;
 
-        Sym.Sym4D_X_SendMosionData(-100, -100);
-        yield return ws;
+        // Sym.Sym4D_X_SendMosionData(-100, -100);
+        // yield return ws;
 
-        Sym.Sym4D_X_SendMosionData(100, -100);
-        yield return ws;
+        // Sym.Sym4D_X_SendMosionData(100, -100);
+        // yield return ws;
 
-        Sym.Sym4D_X_SendMosionData(-100, 100);
-        yield return ws;
+        // Sym.Sym4D_X_SendMosionData(-100, 100);
+        // yield return ws;
 
-        Sym.Sym4D_X_SendMosionData(0, 0);
-        yield return ws;
+        // Sym.Sym4D_X_SendMosionData(0, 0);
+        // yield return ws;
 
         Sym.Sym4D_X_EndContents(); // 세션 클로즈
         yield return ws;
 
 
-        //Wind 테스트
-        Sym.Sym4D_W_StartContents(wPort);
-        yield return ws;
+        // //Wind 테스트
+        // Sym.Sym4D_W_StartContents(wPort);
+        // yield return ws;
 
-        Sym.Sym4D_W_SendMosionData(0);
-        yield return new WaitForSeconds(1);
+        // Sym.Sym4D_W_SendMosionData(0);
+        // yield return new WaitForSeconds(1);
 
-        Sym.Sym4D_W_SendMosionData(50);
-        yield return new WaitForSeconds(5);
+        // Sym.Sym4D_W_SendMosionData(50);
+        // yield return new WaitForSeconds(5);
 
-        Sym.Sym4D_W_SendMosionData(100);
-        yield return new WaitForSeconds(5);
+        // Sym.Sym4D_W_SendMosionData(100);
+        // yield return new WaitForSeconds(5);
 
-        Sym.Sym4D_W_SendMosionData(50);
-        yield return new WaitForSeconds(5);
+        // Sym.Sym4D_W_SendMosionData(50);
+        // yield return new WaitForSeconds(5);
 
-        Sym.Sym4D_W_SendMosionData(0);
-        yield return ws;
+        // Sym.Sym4D_W_SendMosionData(0);
+        // yield return ws;
 
-        Sym.Sym4D_W_EndContents();
+        // Sym.Sym4D_W_EndContents();
     }
 
     float prevJoyX, prevJoyY;
@@ -87,10 +88,13 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
     bool isFinished = false;
 
     PlayerMove playerMove;
+    Transform Controller_Tr;
 
     private void Start()
     {
+        Controller_Tr = transform.parent.transform.Find("[CameraRig]").transform.GetChild(0).transform.GetChild(1).GetComponent<Transform>();
         playerMove = transform.parent.GetComponent<PlayerMove>();
+        OnInit();
     }
 
     void Update()
@@ -99,23 +103,53 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
             return;
 
         currJoyX = playerMove.v;
-        currJoyY = playerMove.h; 
+        currJoyY = playerMove.h;
         if (currJoyX != prevJoyX && PlayerMove.check_ctrl)
         {
-            //Debug.Log($"x : {currJoyX}");
-            //Change Roll
-            prevJoyX = currJoyX;
-            StartCoroutine(ChangeRollNPitch());
+            if (Controller_Tr.eulerAngles.x >= 300 && Controller_Tr.eulerAngles.x <= 350 && Controller_Tr.eulerAngles.y < 105) // left
+            {
+                prevJoyX = currJoyX;
+                StartCoroutine(ChangeRollNPitch());
+            }
+            else if (Controller_Tr.eulerAngles.x >= 10 && Controller_Tr.eulerAngles.x <= 50 && Controller_Tr.eulerAngles.y > 75) // right
+            {
+                prevJoyX = currJoyX;
+                StartCoroutine(ChangeRollNPitch());
+            }
+            else
+            {
+                currJoyX = 0;
+                prevJoyX = currJoyX;
+                StartCoroutine(ChangeRollNPitch());
+            }
+
+
         }
 
         if (currJoyY != prevJoyY && PlayerMove.check_ctrl)
         {
-           // Debug.Log($"y : {currJoyY}");
-            //Change Pitch
+
+            if (Controller_Tr.eulerAngles.z < 270) // up
+            {
+                prevJoyY = currJoyY;
+                StartCoroutine(ChangeRollNPitch());
+            }
+        }
+        else if (Controller_Tr.eulerAngles.z > 295) // down
+        {
+            if (Controller_Tr.eulerAngles.z < 270) // up
+            {
+                prevJoyY = currJoyY;
+                StartCoroutine(ChangeRollNPitch());
+            }
+
+        }
+        else
+        {
+            currJoyY = 0;
             prevJoyY = currJoyY;
             StartCoroutine(ChangeRollNPitch());
         }
-
 
     }
 
@@ -127,8 +161,8 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
         Sym.Sym4D_X_StartContents(xPort);
         yield return new WaitForSeconds(0.1f);
 
-        Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 100), (int)(currJoyY * 100));
-        Debug.Log((int)(-currJoyX * 100) +" and " +(int)(currJoyY * 100));
+        Sym.Sym4D_X_SendMosionData((int)(-currJoyX * 50), (int)(-currJoyY * 50));
+        Debug.Log((int)(-currJoyX * 100) + " and " + (int)(-currJoyY * 100));
 
         yield return new WaitForSeconds(0.1f);
     }
