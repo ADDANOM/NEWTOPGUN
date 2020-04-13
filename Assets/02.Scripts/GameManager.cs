@@ -167,13 +167,17 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OnExiting()
     {
-        Debug.Log("bye");
-        SceneManager.LoadScene(0);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(0);
+        }
     }
 
     public void OnRestarting()
     {
-        Debug.Log("SeeyouLater~");
-        SceneManager.LoadScene(1);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(1);
+        }
     }
 }
