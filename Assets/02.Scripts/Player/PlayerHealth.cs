@@ -111,6 +111,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
                 {
                     gameoverPanel.SetActive(true);
                     GameOver();
+                    PlayerMove.enabled = false;
                 }
                 else
                 {
@@ -118,13 +119,14 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
                     {
                         gameoverPanel.SetActive(true);
                         GameOver();
+                        PlayerMove.enabled = false;
                     }
                 }
             }
             else
                 gameoverPanel.SetActive(false);
 
-                
+
 
             if (prePlayerHealth != curPlayerHealth)
             {
