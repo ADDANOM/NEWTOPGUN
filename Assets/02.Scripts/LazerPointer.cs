@@ -80,8 +80,8 @@ public class LazerPointer : MonoBehaviour
         line.positionCount = 2;
         line.SetPosition(0, Vector3.zero);
         line.SetPosition(1, new Vector3(0, 0, dis));
-        line.startWidth = 0.05f;
-        line.endWidth = 0.05f;
+        line.startWidth = 0.005f;
+        line.endWidth = 0.005f;
 
         line.material = new Material(Shader.Find("Unlit/Color"));
         line.material.color = Color.red;
