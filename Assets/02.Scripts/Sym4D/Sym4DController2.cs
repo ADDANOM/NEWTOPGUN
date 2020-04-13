@@ -118,7 +118,10 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
             }
             else
             {
-                currJoyX = 0;
+                if (currJoyX > 0.0f)
+                    currJoyX -= 0.02f;
+                else if (currJoyX < 0.0f)
+                    currJoyX += 0.02f;
                 prevJoyX = currJoyX;
                 StartCoroutine(ChangeRollNPitch());
             }
@@ -146,7 +149,10 @@ public class Sym4DController2 : MonoBehaviourPunCallbacks
         }
         else
         {
-            currJoyY = 0;
+            if (currJoyY > 0.0f)
+                currJoyY -= 0.02f;
+            else if (currJoyY < 0.0f)
+                currJoyY += 0.02f;
             prevJoyY = currJoyY;
             StartCoroutine(ChangeRollNPitch());
         }

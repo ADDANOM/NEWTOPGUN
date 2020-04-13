@@ -34011,6 +34011,8 @@ MonoBehaviour:
   PlayerDeath: 0
   gameOver: 0
   P_DamagedSounds: {fileID: 8300000, guid: 27dd9f809afa3e84aa25de19848b9a1b, type: 3}
+  damageImage: {fileID: 0}
+  flashCol: {r: 1, g: 0, b: 0, a: 0.4}
 --- !u!114 &7887184949652274554
 MonoBehaviour:
   m_ObjectHideFlags: 0
