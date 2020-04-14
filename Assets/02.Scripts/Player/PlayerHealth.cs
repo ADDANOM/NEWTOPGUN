@@ -31,6 +31,10 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     GameObject damageImage;
     bool damaged = true;
     public GameObject gameoverPanel;
+    Boss_Health boss_Health;
+
+    GameObject clearCanv;
+    PlayerShot playerShot;
 
     private void Start()
     {
@@ -58,6 +62,9 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         laser = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("[CameraRig]").gameObject;
 
         myaudio = GetComponent<AudioSource>();
+        boss_Health = GameObject.Find("Boss_position").transform.Find("BOSS").GetComponent<Boss_Health>();
+        clearCanv = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("ClearCanvas").gameObject;
+        playerShot = GetComponent<PlayerShot>();
     }
 
 
@@ -103,15 +110,25 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
+
+
+
+
         if (photonView.IsMine)
         {
+            if (boss_Health.BossDeath == true)
+            {
+                StartCoroutine("ClearCanvas");
+            }
+
+            
             if (PlayerDeath && PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 gameoverPanel.SetActive(true);
                 GameOver();
                 PlayerMove.enabled = false;
             }
-            else if (!PlayerDeath && PhotonNetwork.CurrentRoom.PlayerCount == 1)
+            else if (!PlayerDeath && PhotonNetwork.CurrentRoom.PlayerCount == 1 && boss_Health.BossDeath == false)
             {
                 gameoverPanel.SetActive(false);
                 hpBar.SetActive(true);
@@ -315,6 +332,17 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         damageImage.SetActive(false);
 
         damaged = false;
+    }
+
+
+    IEnumerator ClearCanvas()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        laser.SetActive(true);
+        clearCanv.SetActive(true);
+        PlayerMove.enabled = false;
+        playerShot.doBomb();
     }
 
 }

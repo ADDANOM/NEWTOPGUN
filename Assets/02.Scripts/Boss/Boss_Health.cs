@@ -12,10 +12,12 @@ public class Boss_Health : MonoBehaviour
 
     private AudioSource B_audio;
 
-    public GameObject clearCanv;
     GameObject laser;
+    PlayerMove playerMove;
+
     private void Start()
     {
+        playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
         tr = gameObject.transform.parent.GetComponent<Transform>();
         bossFire = GameObject.Find("BOSS_Fired").GetComponent<ParticleSystem>();
         curBossHealth = 20000.0f;
@@ -43,15 +45,8 @@ public class Boss_Health : MonoBehaviour
 
             Destroy(tr.gameObject, 10.0f);
 
-            StartCoroutine("ClearCanvas");
+            
         }
     }
     
-    IEnumerator ClearCanvas()
-    {
-        yield return new WaitForSeconds(3.0f);
-
-        laser.SetActive(true);
-        clearCanv.SetActive(true);
-    }
 }
