@@ -42,7 +42,7 @@ public class EnemyControll : MonoBehaviour
             EnemycurHealth -= 10.0f;
             //ExPlosion.Play();  // 체력 0이 되면 실행하면된다. / 지금은 바로실행됨;  
 
-            Debug.Log("Destroy");
+            Debug.Log("E_Destroy");
             E_audio.Play();
             Destroy(Fa,0.5f);
         }

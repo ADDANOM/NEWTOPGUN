@@ -313,7 +313,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         damageImage.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         damageImage.SetActive(false);
-        Debug.Log("333");
+
         damaged = false;
     }
 
