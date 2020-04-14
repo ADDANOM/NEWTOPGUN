@@ -12,6 +12,7 @@ public class Boss_Health : MonoBehaviour
 
     private AudioSource B_audio;
 
+    public GameObject clearCanv;
     private void Start()
     {
         tr = gameObject.transform.parent.GetComponent<Transform>();
@@ -38,9 +39,15 @@ public class Boss_Health : MonoBehaviour
             B_audio.Play();
 
             Destroy(tr.gameObject, 10.0f);
+
+            StartCoroutine("ClearCanvas");
         }
-
-
     }
+    
+    IEnumerator ClearCanvas()
+    {
+        yield return new WaitForSeconds(3.0f);
 
+        clearCanv.SetActive(true);
+    }
 }
