@@ -13,6 +13,7 @@ public class Boss_Health : MonoBehaviour
     private AudioSource B_audio;
 
     public GameObject clearCanv;
+    GameObject laser;
     private void Start()
     {
         tr = gameObject.transform.parent.GetComponent<Transform>();
@@ -20,6 +21,8 @@ public class Boss_Health : MonoBehaviour
         curBossHealth = 20000.0f;
 
         B_audio = GetComponent<AudioSource>();
+
+        laser = GameObject.Find("CameraRig").transform.Find("Camera").transform.Find("[CameraRig]").gameObject;
     }
 
     private void Update()
@@ -48,6 +51,7 @@ public class Boss_Health : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
 
+        laser.SetActive(true);
         clearCanv.SetActive(true);
     }
 }
