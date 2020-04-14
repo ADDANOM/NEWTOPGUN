@@ -12,9 +12,15 @@ public class SelectCharactor : MonoBehaviour
     public static int charactorNum = 0;
     int value = 0;
 
+    AudioSource mysource;
+
+
+
     void Start()
     {
         turn.eulerAngles = new Vector3(0, value, 0);  // 각도 초기화
+
+        mysource = GetComponent<AudioSource>();
         
     }
 
@@ -54,11 +60,15 @@ public class SelectCharactor : MonoBehaviour
     {
         bTurnLeft = true;
         bTurnRight = false;
+
+        mysource.Play();
     }
 
     public void turnRight()
     {
         bTurnRight = true;
         bTurnLeft = false;
+
+        mysource.Play();
     }
 }

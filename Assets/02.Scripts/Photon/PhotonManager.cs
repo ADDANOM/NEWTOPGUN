@@ -14,6 +14,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
+    AudioSource mysource;
 
     void Start()
     {
@@ -29,6 +30,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             PhotonNetwork.NickName = playerName;
             PhotonNetwork.ConnectUsingSettings();
         }
+
+        mysource = GetComponent<AudioSource>();
     }
 
     #region  DEVELOPER_CALLBACK
@@ -38,6 +41,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     }
     public void OnCreateRoomButtonClick()
     {
+        mysource.Play();
+
         RoomOptions ro = new RoomOptions();
         ro.MaxPlayers = 2;
         ro.IsOpen = true;
@@ -66,6 +71,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
+        mysource.Play();
         Debug.Log("Joined Room !!!");
 
         if (PhotonNetwork.IsMasterClient)

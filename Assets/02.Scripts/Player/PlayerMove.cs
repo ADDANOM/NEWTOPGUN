@@ -109,9 +109,9 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
             updateInput();
             flight_anim();
             shot();
-            photonView.RPC("shot", RpcTarget.Others);
+            photonView.RPC("shot", RpcTarget.Others); // RPC 상대Pc의 내 아바타에게 해당 함수의 실행을 전달
         }
-        else
+        else  // 상대 아바타
         {
             Vector3 pos = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 5.0f);
             Quaternion rot = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 5.0f);
