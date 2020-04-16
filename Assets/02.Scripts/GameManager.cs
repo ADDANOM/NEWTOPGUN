@@ -70,13 +70,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         timerIncrementValue = PhotonNetwork.Time - startTime;
         if (timerIncrementValue >= 10.0f && timerIncrementValue <= 60.0f)
         {
+
             spawnMgr.SetActive(true);
         }
         else if (timerIncrementValue >= 60.0f && timerIncrementValue <= 65.0f)
         {
             spawnMgr.SetActive(false);
             BOSS.SetActive(true);
-            boss_tr.Translate(new Vector3(0.0f, 5.0f, 0.0f) * 25 * Time.deltaTime);
+            // boss_tr.Translate(new Vector3(0.0f, 5.0f, 0.0f) * 25 * Time.deltaTime);
+            boss_tr.position = Vector3.Lerp(boss_tr.position, new Vector3(0, 0, 550), Time.deltaTime * 1.0f);
         }
         else if (timerIncrementValue > 65.0f)
             bossPattern();
@@ -167,7 +169,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OnExiting()
     {
-         Debug.Log("exit1");
+        Debug.Log("exit1");
         if (PhotonNetwork.IsMasterClient)
         {
             // Debug.Log("exit2");

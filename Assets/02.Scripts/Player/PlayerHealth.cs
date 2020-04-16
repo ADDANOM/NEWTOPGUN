@@ -71,7 +71,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.CompareTag("BULLET") && !PlayerDeath && (Time.time > lastDamageTime + 2.0f) && (Time.time > immotalTime + 2.0f))
+        if (other.gameObject.CompareTag("BULLET") && !PlayerDeath && (Time.time > lastDamageTime + 1.0f) && (Time.time > immotalTime + 2.0f))
         {
             if (curPlayerHealth > 1.0f)
             {
@@ -92,13 +92,13 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
             {
                 Debug.Log("already gameOver");
             }
-            else if (!otherDeath && !gameOver && (Time.time > lastRescueTime + 10.0f))
+            else if (!otherDeath && !gameOver && (Time.time > lastRescueTime + 15.0f))
             {
                 Repaired();
                 lastRescueTime = Time.time;
                 immotalTime = Time.time;
             }
-            else if (!otherDeath && !gameOver && (Time.time < lastRescueTime + 10.0f))
+            else if (!otherDeath && !gameOver && (Time.time < lastRescueTime + 15.0f))
                 Debug.Log($"{5 + lastRescueTime - Time.time} seconds later");
         }
 

@@ -49,7 +49,7 @@ public class PlayerWarning : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("GO DOWN!");
                     warn_down.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    _image.color = new Color(0.0f, 0.0f, 0.0f, 0.8f);
                 }
                 else
                 {
@@ -64,7 +64,7 @@ public class PlayerWarning : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("Go UP!");
                     warn_up.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    _image.color = new Color(0.0f, 0.0f, 0.0f, 0.8f);
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class PlayerWarning : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("Go RIGHT!");
                     warn_right.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    _image.color = new Color(0.0f, 0.0f, 0.0f, 0.8f);
                 }
                 else
                 {
@@ -93,7 +93,7 @@ public class PlayerWarning : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("Go LEFT!");
                     warn_left.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    _image.color = new Color(0.0f, 0.0f, 0.0f, 0.8f);
                 }
                 else
                 {
@@ -108,7 +108,7 @@ public class PlayerWarning : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("Go BACKWARD!");
                     warn_backward.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    _image.color = new Color(0.0f, 0.0f, 0.0f, 0.8f);
                 }
                 else
                 {
@@ -123,7 +123,7 @@ public class PlayerWarning : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("Go FORWARD!");
                     warn_forward.SetActive(true);
-                    _image.color = new Color(0.2f, 0.0f, 1.0f, 0.25f);
+                    _image.color = new Color(0.0f, 0.0f, 0.0f, 0.8f);
                 }
                 else
                 {

@@ -47,7 +47,7 @@ public class PlayerGetitem : MonoBehaviour
         }
         else if (other.gameObject.name.Contains("Boom"))
         {
-            if (playerShot.bombStock <= 2 && playerHealth.curPlayerHealth > 0)
+            if (playerShot.bombStock <= 3 && playerHealth.curPlayerHealth > 0)
             {
                 playerShot.bombStock += 1;
             }
