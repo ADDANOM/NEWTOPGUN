@@ -220,7 +220,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
                 _go = 0.0f;
             forwardSpeed = 1.0f * _go; // moving forward , backward
 
-
             var main1 = Booster_1.main;
             var main2 = Booster_2.main;
             if (forwardSpeed < 0)
@@ -247,16 +246,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
                 if (v >= -0.98f)
                     v -= 0.02f;
                 moveSide = -1.0f * Time.deltaTime;
-
-
             }
             else if (Controller_Tr.eulerAngles.x >= 10 && Controller_Tr.eulerAngles.x <= 50 && Controller_Tr.eulerAngles.y > 75) // right
             {
                 if (v <= 0.98f)
                     v += 0.02f;
                 moveSide = Time.deltaTime;
-
-
             }
             else
             {
@@ -265,27 +260,19 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
                     v -= 0.02f;
                 else if (v < 0.0f)
                     v += 0.02f;
-
-
             }
-
-
 
             if (Controller_Tr.eulerAngles.z < 270) // up
             {
                 if (h <= 0.98f)
                     h += 0.02f;
                 moveUp = Time.deltaTime;
-
-
             }
             else if (Controller_Tr.eulerAngles.z > 295) // down
             {
                 if (h >= -0.98f)
                     h -= 0.02f;
                 moveUp = -1.0f * Time.deltaTime;
-
-
             }
             else
             {
